@@ -10,9 +10,6 @@ class Matrix
 	const unsigned rows;
 	const unsigned cols;
 
-	// Helper.
-	unsigned getArrayLocation(const unsigned &i, const unsigned &j) const { return j + i * cols; }
-
 public:
 	Matrix(const unsigned &rows, const unsigned &cols) : rows{rows}, cols{cols}
 	{
@@ -58,7 +55,7 @@ Matrix<T>::operator std::string() const
 	{
 		for (unsigned j = 0; j < cols; j++)
 		{
-			T &entry = data[getArrayLocation(i, j)];
+			const T &entry = (*this)(i, j);
 			std::string as_string = std::to_string(entry);
 			unsigned width = static_cast<unsigned>(as_string.length());
 			max_width = (width > max_width) ? width : max_width;
@@ -72,7 +69,7 @@ Matrix<T>::operator std::string() const
 	{
 		for (unsigned j = 0; j < cols; j++)
 		{
-			T entry = (*this)(i, j); // 'this' is const Matrix<T>* here; so copies value.
+			const T &entry = (*this)(i, j);
 			oss << std::setw(max_width + 1) << entry;
 		}
 		if (i < rows - 1)
