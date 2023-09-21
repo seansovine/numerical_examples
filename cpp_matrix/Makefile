@@ -1,6 +1,10 @@
 # Build and run the program.
+#  For use by the bld shell script.
 
-main_filename=matrix_test
+# Set by bld:
+# main_filename=markov_iteration
+# main_filename=matrix_test
+
 flags=-Wall #-std=c++11 -- Uncomment for testing.
 
 all:

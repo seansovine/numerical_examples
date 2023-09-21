@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# argument 1 is the filename w/o extension, argument 2 is the make command.
+#  valid make commands are: "" | "run" | "run_only"
+
+# Die when an error happens.
+
+set -e
+
+cmd="make main_filename=$1 $2"
+eval "$cmd"
