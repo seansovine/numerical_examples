@@ -40,6 +40,6 @@ int main()
 	}
 
 	std::cout << "Approximate convergence after " << num_iter << " iterations." << std::endl;
-	std::cout << "Approximate steady state: " << std::endl
+	std::cout << "Approximate 1 * π for steady state π: " << std::endl
 			  << std::string(curr) << std::endl;
 }
