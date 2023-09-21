@@ -15,3 +15,5 @@ These are just fun exercises and learning tools. Steps along the way.
 This is the start of a very basic C++ matrix class template library.
 Currently implements matrix and vector types with scalar and
 matrix-matrix multiplication. Definitely a work-in-progress.
+
+See the project [README](./cpp_matrix/README.md).
