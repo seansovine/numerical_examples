@@ -35,3 +35,8 @@ Here are some early decisions that have shaped the design:
 - Use the Curiously Recurring Template Pattern for handling inheritance.
 - Use expression templates for arithmetic operations.
 - Optimize the matrix multiplication implementation.
+
+And, maybe...
+
+- Add more convenient way to initialize Matrix, maybe using 2d-array literals.
+- Consider casting scalars, e.g., to allow integer matrix x double matrix.
