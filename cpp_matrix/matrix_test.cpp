@@ -1,5 +1,5 @@
 #include <iostream>
-#include "matrix.h"
+#include "matrix_lib/matrix_lib.hpp"
 
 int main()
 {
@@ -13,7 +13,7 @@ int main()
 	m(1, 1) = 1;
 
 	std::cout << std::endl
-			  << "Original matrix:" << std::endl
+			  << "Original matrix:"
 			  << std::endl
 			  << std::string(m) << std::endl;
 
@@ -21,10 +21,10 @@ int main()
 	entry = 0;
 	m(1, 0) = 0;
 
-	Matrix<int> sProdM = 247 * m; // Will move or elide copy (for C++ >=17).
+	Matrix<int> sProdM = 247 * m; // Will move (C++ <17) or elide copy (for C++ >=17).
 
 	std::cout << std::endl
-			  << "Modified matrix:" << std::endl
+			  << "Modified matrix:"
 			  << std::endl
 			  << std::string(sProdM) << std::endl;
 
@@ -35,9 +35,18 @@ int main()
 	Vector<double> sProdV = 2.0 * v;
 
 	std::cout << std::endl
-			  << "Vector:" << std::endl
+			  << "Vector:"
 			  << std::endl
 			  << std::string(sProdV) << std::endl;
+
+	m(0, 0) = 2;
+	m(1, 1) = 3;
+	Matrix<int> product = m * m;
+
+	std::cout << std::endl
+			  << "Product m * m:"
+			  << std::endl
+			  << std::string(product) << std::endl;
 
 	return EXIT_SUCCESS;
 }
