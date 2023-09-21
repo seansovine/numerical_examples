@@ -40,8 +40,8 @@ First:
   - Matrix-vector product (just need to handle return type).
   - Vector-vector dot product.
 - Use the Matrix class to implement a simple numerical ODE solver.
-- Use the Curiously Recurring Template Pattern for handling inheritance.
-- Use expression templates for arithmetic operations.
+- Use the [Curiously Recurring Template Pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern) for handling inheritance.
+- Use [expression templates](https://en.wikipedia.org/wiki/Expression_templates) for arithmetic operations.
 - Optimize the matrix multiplication implementation.
 
 And then, maybe:
