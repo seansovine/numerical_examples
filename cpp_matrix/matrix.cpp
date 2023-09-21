@@ -24,7 +24,7 @@ public:
 
 	// See: https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op
 	T &operator()(unsigned row, unsigned col);		// To modify the value.
-	T operator()(unsigned row, unsigned col) const; // Return a copy of the value.
+	T operator()(unsigned row, unsigned col) const; // For use with const Matrixes.
 
 	explicit operator std::string() const;
 };
