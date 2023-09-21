@@ -43,14 +43,12 @@ Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs)
 		throw std::domain_error("LHS #cols must match RHS #rows.");
 
 	Matrix<T> result{lhs.rows, rhs.cols};
-
-	// TODO: This is naive; do this more efficiently.
 	for (unsigned i = 0; i < lhs.rows; i++)
 		for (unsigned k = 0; k < rhs.cols; k++)
 			result(i, k) = prodIK_(lhs, rhs, i, k);
 
 	return result;
-}
+} // Basic algorithm.
 
 template <typename T>
 Matrix<T> operator+(const Matrix<T> &lhs, const Matrix<T> &rhs)
@@ -59,8 +57,6 @@ Matrix<T> operator+(const Matrix<T> &lhs, const Matrix<T> &rhs)
 		throw std::domain_error("Dimensions must match to add matrices.");
 
 	Matrix<T> result{lhs.rows, rhs.cols};
-
-	// TODO: This is naive; do this more efficiently.
 	for (unsigned i = 0; i < lhs.rows; i++)
 		for (unsigned j = 0; j < rhs.cols; j++)
 			result(i, j) = lhs(i, j) + rhs(i, j);
