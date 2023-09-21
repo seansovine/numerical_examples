@@ -6,7 +6,8 @@ and define some of its operations.
 An eventual goal is to use this class as part of the implementation
 of a basic, yet fairly general, ODE solver.
 
-The purpose of this project is hands-on learning.
+The purpose of this project is hands-on learning. I'm not sure how much more I'll put into this
+particular project, but it has been a great learning experience to work on it.
 
 ## Features
 
@@ -29,6 +30,7 @@ Here are some early decisions that have shaped the design:
 - Improve string output formatting.
 - Implement more operations:
   - Matrix transpose
+  - Matrix-vector product (just need to handle return type).
   - Vector dot product
 - Use the Matrix class to implement a simple numerical ODE solver.
 - Use the Curiously Recurring Template Pattern for to hand inheritance.
