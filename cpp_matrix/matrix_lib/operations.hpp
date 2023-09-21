@@ -25,7 +25,7 @@ Vector<T> operator*(const T &a, const Vector<T> &m)
 	return static_cast<Vector<T>>(std::move(result));
 }
 
-/* ---- Matrix-Matrix product. ---- */
+/* ---- Matrix-Matrix operations. ---- */
 
 template <typename T>
 T prodIK_(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i, unsigned k)
@@ -48,6 +48,22 @@ Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs)
 	for (unsigned i = 0; i < lhs.rows; i++)
 		for (unsigned k = 0; k < rhs.cols; k++)
 			result(i, k) = prodIK_(lhs, rhs, i, k);
+
+	return result;
+}
+
+template <typename T>
+Matrix<T> operator+(const Matrix<T> &lhs, const Matrix<T> &rhs)
+{
+	if (lhs.cols != rhs.cols || lhs.rows != rhs.rows)
+		throw std::domain_error("Dimensions must match to add matrices.");
+
+	Matrix<T> result{lhs.rows, rhs.cols};
+
+	// TODO: This is naive; do this more efficiently.
+	for (unsigned i = 0; i < lhs.rows; i++)
+		for (unsigned j = 0; j < rhs.cols; j++)
+			result(i, j) = lhs(i, j) + rhs(i, j);
 
 	return result;
 }
