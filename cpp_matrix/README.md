@@ -3,8 +3,8 @@
 In this project we implement a basic matrix class template
 and define some of its operations.
 
-An eventual goal is to use this class as part of the implementation
-of a basic, yet fairly general, ODE solver.
+An eventual goal is to use this library as part of the implementation
+of a basic, yet fairly general, ODE solver, again just for fun and experience.
 
 The purpose of this project is hands-on learning. I'm not sure how much more I'll put into this
 particular project, but it has been a great learning experience to work on it.
@@ -20,10 +20,9 @@ particular project, but it has been a great learning experience to work on it.
 Here are some early decisions that have shaped the design:
 
 - Each matrix instance has constant shape.
-  - This means we should be checking the shape in copy and move constructors.
 - Operations return new objects.
-  - This is necessary for matrix-matrix or matrix-vector products; it seems natural for scalar.
-  - Eventually we can implement lazy evaluation of these.
+  - This is necessary for arbitrary matrix-matrix or matrix-vector products; it seems natural for scalar.
+  - Eventually we can implement a basic lazy evaluation scheme for these.
 
 ## To Do
 
@@ -37,10 +36,12 @@ Here are some early decisions that have shaped the design:
 - Use expression templates for arithmetic operations (major refactor).
 - Optimize the matrix multiplication implementation.
 
-## On Inheritance (and Templates) and Vector
+## Inheritance (and Templates) and Vector
 
-The design of Vector has brought to light some challenges of using
+The design of Vector brought to light some challenges of using
 inheritance with templates. Basically, we followed compiler messages and
 internet searches for help and documentation until we made it work. It would
 be good to go back and read up on this now, to find the standard ways
 of handling this.
+
+Perhaps this article by Rainer Grimm will set us right: [modernescpp.com](https://www.modernescpp.com/index.php/surprise-included-inheritance-and-member-functions-of-class-templates/)
