@@ -12,6 +12,20 @@ some effort to avoid unnecessary object copying.
 The file `markov_iteration.cpp` uses this library to approximate $\lim_{k\rightarrow\infty}m^k$, where
 $m$ is a stochastic transition matrix. If this limit exists, it is equal to $\mathbf{1}\cdot \pi$,
 where $\pi$ is the steady-state distribution of the Markov chain with transition matrix $m$ and $\mathbf{1}$ is a column vector of $1$'s.
+Example output:
+
+```text
+Markov chain steady-state iteration:
+
+Transition matrix m =
+ 0.550 0.450
+ 0.400 0.600
+
+Approximate convergence after 15 iterations.
+Approximate 1 * π for steady state π:
+ 0.471 0.529
+ 0.471 0.529
+```
 
 ## Features
 
