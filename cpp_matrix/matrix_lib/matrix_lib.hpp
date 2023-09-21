@@ -4,4 +4,5 @@
 
 #include "matrix.hpp"
 #include "vector.hpp"
-#include "products.hpp"
+#include "operations.hpp"
+#include "utils.hpp"
