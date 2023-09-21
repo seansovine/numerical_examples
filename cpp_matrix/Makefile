@@ -1,10 +1,11 @@
 # Build and run the program.
 
 main_filename=matrix_test
+flags=-Wall #-std=c++11 -- Uncomment for testing.
 
 all:
 	@echo "Building..."
-	g++ -Wall $(main_filename).cpp -o build/$(main_filename)
+	g++ $(flags) $(main_filename).cpp -o build/$(main_filename)
 
 runner:
 	@./build/$(main_filename)
