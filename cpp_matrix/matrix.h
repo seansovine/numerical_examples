@@ -158,6 +158,7 @@ public:
 
 	Vector(const Matrix<T> &mat) : Matrix<T>(mat){};
 	Vector(const Vector<T> &other) : Matrix<T>(other){};
+	Vector(Matrix<T> &&other) : Matrix<T>(other){};
 	Vector(Vector<T> &&other) : Matrix<T>(other){};
 
 	template <typename _>
