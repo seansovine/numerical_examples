@@ -33,6 +33,20 @@ public:
 /* ---- Vector implementation. ---- */
 
 template <typename T>
+T &Vector<T>::operator[](const unsigned &i)
+{
+	return (*this)(i, 0);
+}
+
+template <typename T>
+T Vector<T>::operator[](const unsigned &i) const
+{
+	return (*this)(i, 0);
+}
+
+// Constructors. (Base desctructor is used.)
+
+template <typename T>
 Vector<T>::Vector(const unsigned &rows) : Matrix<T>(rows, 1){};
 
 template <typename T>
@@ -46,17 +60,5 @@ Vector<T>::Vector(Matrix<T> &&other) : Matrix<T>(other){};
 
 template <typename T>
 Vector<T>::Vector(Vector<T> &&other) : Matrix<T>(other){};
-
-template <typename T>
-T &Vector<T>::operator[](const unsigned &i)
-{
-	return (*this)(i, 0);
-}
-
-template <typename T>
-T Vector<T>::operator[](const unsigned &i) const
-{
-	return (*this)(i, 0);
-}
 
 #endif

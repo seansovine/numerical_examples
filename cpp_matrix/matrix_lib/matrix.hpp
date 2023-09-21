@@ -97,7 +97,8 @@ Matrix<T>::operator std::string() const
 	return oss.str();
 }
 
-// Constructors.
+// Constructors and destructor.
+
 template <typename T>
 Matrix<T>::~Matrix()
 {
