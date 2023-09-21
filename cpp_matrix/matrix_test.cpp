@@ -12,8 +12,7 @@ int main()
 	m(1, 0) = 25;
 	m(1, 1) = 1;
 
-	std::cout << std::endl
-			  << "Original matrix m ="
+	std::cout << "Original matrix m ="
 			  << std::endl
 			  << std::string(m) << std::endl;
 
@@ -66,6 +65,22 @@ int main()
 			  << "Product m * m ="
 			  << std::endl
 			  << std::string(product) << std::endl;
+
+	Matrix<int> n{1, 2};
+	n(0, 0) = 6;
+	n(0, 1) = 42;
+
+	std::cout << std::endl
+			  << "Matrix n ="
+			  << std::endl
+			  << std::string(n) << std::endl;
+
+	Matrix<int> prodNM = n * m;
+
+	std::cout << std::endl
+			  << "Product n * m ="
+			  << std::endl
+			  << std::string(prodNM) << std::endl;
 
 	return EXIT_SUCCESS;
 }
