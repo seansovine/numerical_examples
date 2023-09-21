@@ -160,8 +160,6 @@ public:
 	Vector(const Vector<T> &other) : Matrix<T>(other){};
 	Vector(Vector<T> &&other) : Matrix<T>(other){};
 
-	Vector<T> &operator=(const Vector<T> &);
-
 	template <typename _>
 	friend Vector<T> operator*(const T &a, const Vector<T> &m);
 };
