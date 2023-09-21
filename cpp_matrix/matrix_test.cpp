@@ -40,6 +40,11 @@ int main()
 	v[0] = 0.1;
 	v[1] = 1.2;
 
+	std::cout << std::endl
+			  << "Vector v ="
+			  << std::endl
+			  << std::string(v) << std::endl;
+
 	Vector<double> sProdV = 2.0 * v;
 
 	std::cout << std::endl
