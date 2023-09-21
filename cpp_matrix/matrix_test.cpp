@@ -79,6 +79,13 @@ Matrix<T>::operator std::string() const
 	return oss.str();
 }
 
+/**
+ *  TODO:
+ *   - Add vector subclass with subscript operator.
+ *   - Implement operator* for scalar (first) and matrix multiplication.
+ *   - Move class and method definitions to header.
+ */
+
 /* ---- Main function. ---- */
 
 int main()
