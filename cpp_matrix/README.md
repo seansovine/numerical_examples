@@ -1,12 +1,10 @@
 # Matrix Class Example
 
-In this project we implement a basic matrix and vector class template
-and define the basic operation for matrix and vector objects.
-
-An eventual goal is to use this library as part of the implementation
-of a basic, yet fairly general, differential equation solver.
-
-The current version is not optimized much for efficiency, except that we've put in
+In this project we implement basic matrix and vector class templates
+and define the basic operations for matrix and vector objects.
+An eventual goal is to use this library in the implementation
+of a basic but fairly general differential equation solver.
+The current version is not optimized much for efficiency, except for
 some effort to avoid unnecessary object copying.
 
 ## Markov chain example
