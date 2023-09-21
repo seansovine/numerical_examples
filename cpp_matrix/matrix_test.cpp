@@ -44,6 +44,13 @@ int main()
 			  << std::endl
 			  << std::string(v) << std::endl;
 
+	v[0] = 7.1;
+
+	std::cout << std::endl
+			  << "Modified vector v ="
+			  << std::endl
+			  << std::string(v) << std::endl;
+
 	Vector<double> sProdV = 2.0 * v;
 
 	std::cout << std::endl
