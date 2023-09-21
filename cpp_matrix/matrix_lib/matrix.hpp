@@ -70,14 +70,17 @@ template <typename T>
 Matrix<T>::operator std::string() const
 {
 	// Compute max width for alignment.
-
 	unsigned max_width = 0; // Could do per-column.
 	for (unsigned i = 0; i < rows; i++)
 	{
 		for (unsigned j = 0; j < cols; j++)
 		{
 			const T &entry = (*this)(i, j);
-			std::string as_string = std::to_string(entry);
+			std::ostringstream wrd;
+			wrd.precision(PRECISION);
+			wrd << std::fixed << entry;
+			std::string as_string = wrd.str();
+
 			unsigned width = static_cast<unsigned>(as_string.length());
 			max_width = (width > max_width) ? width : max_width;
 		}
@@ -86,11 +89,13 @@ Matrix<T>::operator std::string() const
 	// Build string.
 
 	std::stringstream oss{};
+	oss << std::fixed << std::setprecision(PRECISION);
 	for (unsigned i = 0; i < rows; i++)
 	{
 		for (unsigned j = 0; j < cols; j++)
 		{
 			const T &entry = (*this)(i, j);
+			std::string as_string = std::to_string(entry);
 			oss << std::setw(max_width + 1) << entry;
 		}
 		if (i < rows - 1)
