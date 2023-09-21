@@ -21,6 +21,8 @@ int main()
 	entry = 0;
 	m(1, 0) = 0;
 
+	m = 247 * m;
+
 	std::cout << std::endl
 			  << "Modified matrix:" << std::endl
 			  << std::endl

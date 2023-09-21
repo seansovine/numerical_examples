@@ -2,6 +2,14 @@
 #include <iomanip>
 #include <sstream>
 
+/* ---- Forward declarations. ---- */
+
+template <typename T>
+class Matrix;
+
+template <typename T>
+Matrix<T> operator*(const T &, const Matrix<T> &);
+
 /* ---- Matrix declaration. ---- */
 
 template <typename T>
@@ -9,6 +17,8 @@ class Matrix
 {
 	// Store row-major.
 	T *data;
+
+public:
 	const unsigned rows;
 	const unsigned cols;
 
@@ -19,6 +29,9 @@ public:
 		data = new T[num_entries]{};
 	}
 
+	// Explicit copy assignment.
+	Matrix<T> &operator=(const Matrix<T> &);
+
 	~Matrix()
 	{
 		delete[] data;
@@ -27,6 +40,9 @@ public:
 	// See: https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op
 	T &operator()(unsigned row, unsigned col);		// To modify the value.
 	T operator()(unsigned row, unsigned col) const; // For use with const Matrixes.
+
+	template <typename S>
+	friend Matrix<T> operator*(const T &a, const Matrix<T> &m);
 
 	explicit operator std::string() const;
 };
@@ -45,6 +61,21 @@ T Matrix<T>::operator()(unsigned row, unsigned col) const
 {
 	// Row-major access.
 	return data[col + row * cols];
+}
+
+template <typename T>
+Matrix<T> &Matrix<T>::operator=(const Matrix<T> &other)
+{
+	const unsigned int num_entries = rows * cols;
+	data = new T[num_entries]{};
+	for (unsigned i = 0; i < rows; i++)
+	{
+		for (unsigned j = 0; j < cols; j++)
+		{
+			(*this)(i, j) = other(i, j);
+		}
+	}
+	return *this;
 }
 
 template <typename T>
@@ -79,6 +110,22 @@ Matrix<T>::operator std::string() const
 	}
 
 	return oss.str();
+}
+
+// Not a member function.
+
+template <typename T>
+Matrix<T> operator*(const T &a, const Matrix<T> &m)
+{
+	Matrix<T> result{m}; // Copy construct.
+	for (unsigned i = 0; i < m.rows; i++)
+	{
+		for (unsigned j = 0; j < m.cols; j++)
+		{
+			result(i, j) = a * m(i, j);
+		}
+	}
+	return result;
 }
 
 /* ---- Vector declaration. ---- */
