@@ -21,21 +21,23 @@ int main()
 	entry = 0;
 	m(1, 0) = 0;
 
-	m = 247 * m;
+	Matrix<int> sProdM = 247 * m; // Will move or elide copy (for C++ >=17).
 
 	std::cout << std::endl
 			  << "Modified matrix:" << std::endl
 			  << std::endl
-			  << std::string(m) << std::endl;
+			  << std::string(sProdM) << std::endl;
 
 	Vector<double> v(2);
 	v[0] = 0.1;
 	v[1] = 1.2;
 
+	Vector<double> sProdV = 2.0 * v;
+
 	std::cout << std::endl
 			  << "Vector:" << std::endl
 			  << std::endl
-			  << std::string(v) << std::endl;
+			  << std::string(sProdV) << std::endl;
 
 	return EXIT_SUCCESS;
 }

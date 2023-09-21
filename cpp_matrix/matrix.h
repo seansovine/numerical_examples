@@ -10,6 +10,12 @@ class Matrix;
 template <typename T>
 Matrix<T> operator*(const T &, const Matrix<T> &);
 
+template <typename T>
+class Vector;
+
+template <typename T>
+Vector<T> operator*(const T &, const Vector<T> &);
+
 /* ---- Matrix declaration. ---- */
 
 template <typename T>
@@ -29,8 +35,11 @@ public:
 		data = new T[num_entries]{};
 	}
 
-	// Explicit copy assignment.
-	Matrix<T> &operator=(const Matrix<T> &);
+	// Explicit deep copy constructor.
+	Matrix(const Matrix<T> &);
+
+	// Explicit move constructor;
+	Matrix(Matrix<T> &&other) noexcept;
 
 	~Matrix()
 	{
@@ -38,13 +47,14 @@ public:
 	}
 
 	// See: https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op
+
 	T &operator()(unsigned row, unsigned col);		// To modify the value.
 	T operator()(unsigned row, unsigned col) const; // For use with const Matrixes.
 
-	template <typename S>
-	friend Matrix<T> operator*(const T &a, const Matrix<T> &m);
-
 	explicit operator std::string() const;
+
+	template <typename _> // Is this right?
+	friend Matrix<T> operator*(const T &a, const Matrix<T> &m);
 };
 
 /* ---- Matrix implementation. ---- */
@@ -61,21 +71,6 @@ T Matrix<T>::operator()(unsigned row, unsigned col) const
 {
 	// Row-major access.
 	return data[col + row * cols];
-}
-
-template <typename T>
-Matrix<T> &Matrix<T>::operator=(const Matrix<T> &other)
-{
-	const unsigned int num_entries = rows * cols;
-	data = new T[num_entries]{};
-	for (unsigned i = 0; i < rows; i++)
-	{
-		for (unsigned j = 0; j < cols; j++)
-		{
-			(*this)(i, j) = other(i, j);
-		}
-	}
-	return *this;
 }
 
 template <typename T>
@@ -112,12 +107,34 @@ Matrix<T>::operator std::string() const
 	return oss.str();
 }
 
+// Constructors.
+
+template <typename T>
+Matrix<T>::Matrix(Matrix<T> &&other) noexcept : data{other.data}, rows{other.rows}, cols{other.cols}
+{
+	other.data = nullptr;
+}
+
+template <typename T>
+Matrix<T>::Matrix(const Matrix<T> &other) : rows{other.rows}, cols{other.cols}
+{
+	const unsigned int num_entries = rows * cols;
+	data = new T[num_entries]{};
+	for (unsigned i = 0; i < rows; i++)
+	{
+		for (unsigned j = 0; j < cols; j++)
+		{
+			data[j + i * cols] = other(i, j);
+		}
+	}
+}
+
 // Not a member function.
 
 template <typename T>
 Matrix<T> operator*(const T &a, const Matrix<T> &m)
 {
-	Matrix<T> result{m}; // Copy construct.
+	Matrix<T> result{m.rows, m.cols};
 	for (unsigned i = 0; i < m.rows; i++)
 	{
 		for (unsigned j = 0; j < m.cols; j++)
@@ -125,7 +142,7 @@ Matrix<T> operator*(const T &a, const Matrix<T> &m)
 			result(i, j) = a * m(i, j);
 		}
 	}
-	return result;
+	return result; // Returns new Matrix object.
 }
 
 /* ---- Vector declaration. ---- */
@@ -138,6 +155,15 @@ public:
 
 	T &operator[](const unsigned &i);
 	T operator[](const unsigned &i) const;
+
+	Vector(const Matrix<T> &mat) : Matrix<T>(mat){};
+	Vector(const Vector<T> &other) : Matrix<T>(other){};
+	Vector(Vector<T> &&other) : Matrix<T>(other){};
+
+	Vector<T> &operator=(const Vector<T> &);
+
+	template <typename _>
+	friend Vector<T> operator*(const T &a, const Vector<T> &m);
 };
 
 /* ---- Vector implementation. ---- */
@@ -152,4 +178,12 @@ template <typename T>
 T Vector<T>::operator[](const unsigned &i) const
 {
 	return (*this)(i, 0);
+}
+
+template <typename T>
+Vector<T> operator*(const T &a, const Vector<T> &m)
+{
+	Matrix<T> mat{m};
+	Matrix<T> result = a * mat;
+	return static_cast<Vector<T>>(std::move(result));
 }
