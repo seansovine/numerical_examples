@@ -23,11 +23,16 @@ int main()
 	entry = 0;
 	m(1, 0) = 0;
 
+	std::cout << std::endl
+			  << "Modified matrix m ="
+			  << std::endl
+			  << std::string(m) << std::endl;
+
 	Matrix<int> sProdM = 247 * m;
 	// Assignment move (C++ <17) or elide copy (for C++ >=17).
 
 	std::cout << std::endl
-			  << "Modified matrix m ="
+			  << "Scalar multiple 247 * m ="
 			  << std::endl
 			  << std::string(sProdM) << std::endl;
 
@@ -44,6 +49,12 @@ int main()
 
 	m(0, 0) = 2;
 	m(1, 1) = 3;
+
+	std::cout << std::endl
+			  << "Modified matrix m ="
+			  << std::endl
+			  << std::string(m) << std::endl;
+
 	Matrix<int> product = m * m;
 
 	std::cout << std::endl
