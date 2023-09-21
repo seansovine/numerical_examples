@@ -10,7 +10,12 @@ The purpose of this project is hands-on learning.
 
 ## To Do
 
-- Add vector subclass with subscript operator.
-- Implement operator\* for scalar (first) and matrix multiplication.
+- ~~Add vector subclass with subscript operator.~~
+- Implement operator\* for ~~scalar (first) and~~ matrix multiplication.
 - ~~Move class and method definitions to header.~~
 - Use the Matrix class to implement a simple numerical ODE solver.
+
+Further on:
+
+- Make scalar multiplication work for Vector.
+- Perhaps we should use the Curiously Recurring Template Pattern for Vector.
