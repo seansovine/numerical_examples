@@ -13,7 +13,7 @@ int main()
 	m(1, 1) = 1;
 
 	std::cout << std::endl
-			  << "Original matrix:"
+			  << "Original matrix m ="
 			  << std::endl
 			  << std::string(m) << std::endl;
 
@@ -27,7 +27,7 @@ int main()
 	// Assignment move (C++ <17) or elide copy (for C++ >=17).
 
 	std::cout << std::endl
-			  << "Modified matrix:"
+			  << "Modified matrix m ="
 			  << std::endl
 			  << std::string(sProdM) << std::endl;
 
@@ -38,7 +38,7 @@ int main()
 	Vector<double> sProdV = 2.0 * v;
 
 	std::cout << std::endl
-			  << "Vector:"
+			  << "Vector 2 * v ="
 			  << std::endl
 			  << std::string(sProdV) << std::endl;
 
@@ -47,7 +47,7 @@ int main()
 	Matrix<int> product = m * m;
 
 	std::cout << std::endl
-			  << "Product m * m:"
+			  << "Product m * m ="
 			  << std::endl
 			  << std::string(product) << std::endl;
 
