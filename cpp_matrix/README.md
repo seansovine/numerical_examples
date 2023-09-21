@@ -19,7 +19,7 @@ where $\pi$ is the steady-state distribution of the Markov chain with transition
 
 - Has a Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
 - Has a Vector subclass representing a column matrix, implementing the subscript operator.
-- Implements scalar multiplication, and matrix-matrix addition and multiplication, and the matrix $\infty$-norm.
+- Implements scalar multiplication, matrix-matrix addition and multiplication, and the matrix $\infty$-norm.
 - Implements explicit Matrix to string conversion.
 
 ## Design decisions
