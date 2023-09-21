@@ -1,6 +1,6 @@
 # Matrix Class Example
 
-In this project we will implement a basic matrix class template
+In this project we implement a basic matrix class template
 and define some of its operations.
 
 An eventual goal is to use this class as part of the implementation
@@ -8,31 +8,36 @@ of a basic, yet fairly general, ODE solver.
 
 The purpose of this project is hands-on learning.
 
+## Features
+
+- Has a Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
+- Has a Vector subclass representing a column matrix, implementing the subscript operator.
+- Implements scalar and matrix-matrix multiplication.
+
+## Design Decisions
+
+Here are some early decisions that have shaped the design:
+
+- Each matrix instance has constant shape.
+  - This means we should be checking the shape in copy and move constructors.
+- Operations return new objects.
+  - This is necessary for matrix-matrix or matrix-vector products; it seems natural for scalar.
+  - Eventually we can implement lazy evaluation of these.
+
 ## To Do
 
-- ~~Add vector subclass with subscript operator.~~
-- Implement operator\* for ~~scalar (first) and~~ matrix multiplication.
-- ~~Move class and method definitions to header.~~
+- Implement more operations:
+  - Matrix transpose
+  - Vector dot product
 - Use the Matrix class to implement a simple numerical ODE solver.
-
-Further on:
-
-- ~~Make scalar multiplication work for Vector.~~
-- Perhaps we should use the Curiously Recurring Template Pattern for Vector.
+- Use the Curiously Recurring Template Pattern for to hand inheritance.
+- Use expression templates for arithmetic operations (major refactor).
+- Optimize the matrix multiplication implementation.
 
 ## On Inheritance (and Templates) and Vector
 
-We need to pause at this point and make a more sytematic review of
-inheritance. It feels like we've implemented scalar multiplication for Vector
-in a non-optimal way. Along the way we had to explicitly extend constructors
-and the multiplication operator from the Matrix base class. This _could_ be
-a consequence of the decision we made to make scalar multiplication for Matrix
-return a new matrix, vs. modifying the right-hand operand in place. It could
-also be a consequence of the fact that we're force to use a friend function to
-put the scalar value in the left operand.
-
-But, in any case it's clear that we don't really understand the way methods
-(in particular constructors) interact with inheritance. And even less so when
-templates are thrown into the mix.
-
-**TODO:** Read up on these things.
+The design of Vector has brought to light some challenges of using
+inheritance with templates. Basically, we followed compiler messages and
+internet searches for help and documentation until we made it work. It would
+be good to go back and read up on this now, to find the standard ways
+of handling this.
