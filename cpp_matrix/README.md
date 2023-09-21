@@ -26,6 +26,7 @@ Here are some early decisions that have shaped the design:
 
 ## To Do
 
+- Improve string output formatting.
 - Implement more operations:
   - Matrix transpose
   - Vector dot product
