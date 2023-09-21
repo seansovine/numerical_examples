@@ -26,5 +26,14 @@ int main()
 			  << std::endl
 			  << std::string(m) << std::endl;
 
+	Vector<double> v(2);
+	v[0] = 0.1;
+	v[1] = 1.2;
+
+	std::cout << std::endl
+			  << "Vector:" << std::endl
+			  << std::endl
+			  << std::string(v) << std::endl;
+
 	return EXIT_SUCCESS;
 }

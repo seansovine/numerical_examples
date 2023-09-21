@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <sstream>
 
+/* ---- Matrix declaration. ---- */
+
 template <typename T>
 class Matrix
 {
@@ -29,7 +31,7 @@ public:
 	explicit operator std::string() const;
 };
 
-/* ---- Implementation. ---- */
+/* ---- Matrix implementation. ---- */
 
 template <typename T>
 T &Matrix<T>::operator()(unsigned row, unsigned col)
@@ -77,4 +79,30 @@ Matrix<T>::operator std::string() const
 	}
 
 	return oss.str();
+}
+
+/* ---- Vector declaration. ---- */
+
+template <typename T>
+class Vector : public Matrix<T>
+{
+public:
+	Vector(const unsigned &rows) : Matrix<T>(rows, 1) {}
+
+	T &operator[](const unsigned &i);
+	T operator[](const unsigned &i) const;
+};
+
+/* ---- Vector implementation. ---- */
+
+template <typename T>
+T &Vector<T>::operator[](const unsigned &i)
+{
+	return (*this)(i, 0);
+}
+
+template <typename T>
+T Vector<T>::operator[](const unsigned &i) const
+{
+	return (*this)(i, 0);
 }
