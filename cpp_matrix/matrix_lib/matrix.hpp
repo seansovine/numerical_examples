@@ -72,6 +72,7 @@ template <typename T>
 Matrix<T>::operator std::string() const
 {
 	// Compute max width for alignment.
+
 	unsigned max_width = 0; // Could do per-column.
 	for (unsigned i = 0; i < rows; i++)
 	{
@@ -148,7 +149,7 @@ template <typename T>
 Matrix<T> &Matrix<T>::operator=(const Matrix<T> &other)
 {
 	if (other.rows != this->rows || other.cols != this->cols)
-		throw std::domain_error("Dimensions of assigned matrix must match dimensions of destination matrix");
+		throw std::domain_error("Dimensions of assigned matrix must match dimensions of destination matrix.");
 
 	for (unsigned i = 0; i < rows; i++)
 	{
@@ -164,7 +165,7 @@ template <typename T>
 Matrix<T> &Matrix<T>::operator=(Matrix<T> &&other)
 {
 	if (other.rows != rows || other.cols != cols)
-		throw std::domain_error("Dimensions of assigned matrix must match dimensions of destination matrix");
+		throw std::domain_error("Dimensions of assigned matrix must match dimensions of destination matrix.");
 
 	data = other.data;
 	other.data = nullptr;
