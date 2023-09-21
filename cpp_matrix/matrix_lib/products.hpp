@@ -4,7 +4,7 @@
 /* ---- Matrix-Matrix product. ---- */
 
 template <typename T>
-T prodIK(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i, unsigned k)
+T prodIK_(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i, unsigned k)
 {
 	T result{};
 	for (unsigned j = 0; j < lhs.cols; j++)
@@ -23,7 +23,7 @@ Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs)
 	// TODO: This is naive; do this more efficiently.
 	for (unsigned i = 0; i < lhs.rows; i++)
 		for (unsigned k = 0; k < rhs.cols; k++)
-			result(i, k) = prodIK(lhs, rhs, i, k);
+			result(i, k) = prodIK_(lhs, rhs, i, k);
 
 	return result;
 }
