@@ -27,6 +27,15 @@ Approximate 1 * π for steady state π:
  0.471 0.529
 ```
 
+## Building and running
+
+There is a simple shell script to build and run test scripts using the Makefile in this directory:
+
+```shell
+chmod +x bld
+./bld <filename w/o extension> [run|run_only]
+```
+
 ## Features
 
 - Has a Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
