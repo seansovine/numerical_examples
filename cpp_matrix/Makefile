@@ -1,13 +1,13 @@
 # Build and run the program.
 
-filename=matrix
+main_filename=matrix_test
 
 all:
 	@echo "Building..."
-	g++ -Wall $(filename).cpp -o build/$(filename)
+	g++ -Wall $(main_filename).cpp -o build/$(main_filename)
 
 runner:
-	@./build/$(filename)
+	@./build/$(main_filename)
 
 run_only: runner
 
