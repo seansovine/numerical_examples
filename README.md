@@ -1,7 +1,7 @@
 # Numerical Example Projects
 
-This repository will contain example projects that I've created while learning
-more computational mathematics. The code in these projects will be more
+This repository contains example projects that I've created while learning
+more computational mathematics. The code in these projects is more
 incomplete and less polished than what I would want in production code.
 These are fun exercises and learning tools.
 
