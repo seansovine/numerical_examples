@@ -32,6 +32,8 @@ public:
 
 /* ---- Vector implementation. ---- */
 
+// Operators.
+
 template <typename T>
 T &Vector<T>::operator[](const unsigned &i)
 {

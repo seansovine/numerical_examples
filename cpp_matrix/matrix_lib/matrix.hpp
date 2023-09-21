@@ -52,6 +52,8 @@ public:
 
 /* ---- Matrix implementation. ---- */
 
+// Operators.
+
 template <typename T>
 T &Matrix<T>::operator()(unsigned row, unsigned col)
 {
