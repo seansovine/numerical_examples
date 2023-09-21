@@ -131,20 +131,4 @@ Matrix<T>::Matrix(const Matrix<T> &other) : rows{other.rows}, cols{other.cols}
 	}
 }
 
-// Not a member function.
-
-template <typename T>
-Matrix<T> operator*(const T &a, const Matrix<T> &m)
-{
-	Matrix<T> result{m.rows, m.cols};
-	for (unsigned i = 0; i < m.rows; i++)
-	{
-		for (unsigned j = 0; j < m.cols; j++)
-		{
-			result(i, j) = a * m(i, j);
-		}
-	}
-	return result; // Returns new Matrix object.
-}
-
 #endif

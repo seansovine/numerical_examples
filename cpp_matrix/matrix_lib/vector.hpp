@@ -59,12 +59,4 @@ T Vector<T>::operator[](const unsigned &i) const
 	return (*this)(i, 0);
 }
 
-template <typename T>
-Vector<T> operator*(const T &a, const Vector<T> &m)
-{
-	Matrix<T> mat{m};
-	Matrix<T> result = a * mat;
-	return static_cast<Vector<T>>(std::move(result));
-}
-
 #endif

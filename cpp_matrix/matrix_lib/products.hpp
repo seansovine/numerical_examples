@@ -1,6 +1,30 @@
 #include "matrix.hpp"
 #include "vector.hpp"
 
+/* ---- Scalar products. ---- */
+
+template <typename T>
+Matrix<T> operator*(const T &a, const Matrix<T> &m)
+{
+	Matrix<T> result{m.rows, m.cols};
+	for (unsigned i = 0; i < m.rows; i++)
+	{
+		for (unsigned j = 0; j < m.cols; j++)
+		{
+			result(i, j) = a * m(i, j);
+		}
+	}
+	return result; // Returns new Matrix object.
+}
+
+template <typename T>
+Vector<T> operator*(const T &a, const Vector<T> &m)
+{
+	Matrix<T> mat{m};
+	Matrix<T> result = a * mat;
+	return static_cast<Vector<T>>(std::move(result));
+}
+
 /* ---- Matrix-Matrix product. ---- */
 
 template <typename T>
