@@ -1,21 +1,28 @@
 # Matrix Class Example
 
-In this project we implement a basic matrix class template
-and define some of its operations.
-
-The purpose of this project is hands-on learning. I'm not sure how much more I'll put into this
-particular project, but it has been a great learning experience to work on it.
+In this project we implement a basic matrix and vector class template
+and define the basic operation for matrix and vector objects.
 
 An eventual goal is to use this library as part of the implementation
-of a basic, yet fairly general, differential equation solver, also just for the sake of learning.
+of a basic, yet fairly general, differential equation solver.
+
+The current version is not optimized much for efficiency, except that we've put in
+some effort to avoid unnecessary object copying.
+
+## Markov chain example
+
+The file `markov_iteration.cpp` uses this library to approximate $\lim_{k\rightarrow\infty}m^k$, where
+$m$ is a stochastic transition matrix. If this limit exists, it is equal to $\mathbf{1}\cdot \pi$,
+where $\pi$ is the steady-state distribution of the Markov chain with transition matrix $m$, and $\mathbf{1}$ is a column vector of $1$'s.
 
 ## Features
 
 - Has a Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
 - Has a Vector subclass representing a column matrix, implementing the subscript operator.
-- Implements scalar and matrix-matrix multiplication.
+- Implements scalar multiplication, and matrix-matrix and multiplication multiplication, and the matrix $\infty$-norm.
+- Implements explicit Matrix to string conversion.
 
-## Design Decisions
+## Design decisions
 
 Here are some early decisions that have shaped the design:
 
@@ -24,9 +31,8 @@ Here are some early decisions that have shaped the design:
   - This is necessary for arbitrary matrix-matrix or matrix-vector products; it seems natural for scalar.
   - Eventually we can implement a basic lazy evaluation scheme for these, returning an expression template.
 
-## To Do
+## Further ideas
 
-- Improve string output formatting.
 - Implement more operations:
   - Matrix transpose: could be done with a derived class overriding access.
   - Matrix-vector product (just need to handle return type).
@@ -36,7 +42,7 @@ Here are some early decisions that have shaped the design:
 - Use expression templates for arithmetic operations.
 - Optimize the matrix multiplication implementation.
 
-And, maybe...
+And, maybe:
 
 - Add more convenient way to initialize Matrix, maybe using 2d-array literals.
 - Consider casting scalars, e.g., to allow integer matrix x double matrix.
