@@ -12,7 +12,7 @@ some effort to avoid unnecessary object copying.
 The file `markov_iteration.cpp` uses this library to approximate $\lim_{k\rightarrow\infty}m^k$, where
 $m$ is a stochastic transition matrix. If this limit exists, it is equal to $\mathbf{1}\cdot \pi$,
 where $\pi$ is the steady-state distribution of the Markov chain with transition matrix $m$ and $\mathbf{1}$ is a column vector of $1$'s.
-Example output:
+Example output a run is:
 
 ```text
 Markov chain steady-state iteration:
@@ -65,7 +65,7 @@ First:
 - Use the Matrix class to implement a simple numerical ODE solver.
 - Use the [Curiously Recurring Template Pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern) for handling inheritance.
 - Use [expression templates](https://en.wikipedia.org/wiki/Expression_templates) for arithmetic operations.
-- Optimize the matrix multiplication implementation.
+- Optimize the matrix multiplication -- maybe use BLAS or LAPACK.
 
 And then, maybe:
 
