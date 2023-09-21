@@ -41,6 +41,9 @@ public:
 	T &operator()(unsigned row, unsigned col);		// To modify the value.
 	T operator()(unsigned row, unsigned col) const; // For use with const Matrixes.
 
+	Matrix<T> &operator=(const Matrix<T> &);
+	Matrix<T> &operator=(Matrix<T> &&);
+
 	explicit operator std::string() const;
 
 	template <typename _> // Is this right?
@@ -130,6 +133,35 @@ Matrix<T>::Matrix(const Matrix<T> &other) : rows{other.rows}, cols{other.cols}
 			data[j + i * cols] = other(i, j);
 		}
 	}
+}
+
+// Assignment operators.
+
+template <typename T>
+Matrix<T> &Matrix<T>::operator=(const Matrix<T> &other)
+{
+	if (other.rows != this->rows || other.cols != this->cols)
+		throw std::domain_error("Dimensions of assigned matrix must match dimensions of destination matrix");
+
+	for (unsigned i = 0; i < rows; i++)
+	{
+		for (unsigned j = 0; j < cols; j++)
+		{
+			data[j + i * cols] = other(i, j);
+		}
+	}
+	return *this;
+}
+
+template <typename T>
+Matrix<T> &Matrix<T>::operator=(Matrix<T> &&other)
+{
+	if (other.rows != rows || other.cols != cols)
+		throw std::domain_error("Dimensions of assigned matrix must match dimensions of destination matrix");
+
+	data = other.data;
+	other.data = nullptr;
+	return *this;
 }
 
 #endif
