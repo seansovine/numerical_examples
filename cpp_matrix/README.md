@@ -7,7 +7,7 @@ The purpose of this project is hands-on learning. I'm not sure how much more I'l
 particular project, but it has been a great learning experience to work on it.
 
 An eventual goal is to use this library as part of the implementation
-of a basic, yet fairly general, differential equation solver, again just for the sake of learning.
+of a basic, yet fairly general, differential equation solver, also just for the sake of learning.
 
 ## Features
 
