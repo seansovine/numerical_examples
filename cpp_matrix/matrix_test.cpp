@@ -5,7 +5,7 @@ int main()
 {
 	Matrix<int> m{2, 2};
 
-	// 2 x 2 identity matrix.
+	// 2 x 2 matrix.
 
 	m(0, 0) = 1;
 	m(0, 1) = 1000;
@@ -17,11 +17,14 @@ int main()
 			  << std::endl
 			  << std::string(m) << std::endl;
 
+	// Modify to identity matrix.
+
 	int &entry = m(0, 1);
 	entry = 0;
 	m(1, 0) = 0;
 
-	Matrix<int> sProdM = 247 * m; // Will move (C++ <17) or elide copy (for C++ >=17).
+	Matrix<int> sProdM = 247 * m;
+	// Assignment move (C++ <17) or elide copy (for C++ >=17).
 
 	std::cout << std::endl
 			  << "Modified matrix:"
