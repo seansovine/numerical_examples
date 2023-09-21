@@ -10,11 +10,8 @@ class Matrix;
 template <typename T>
 Matrix<T> operator*(const T &, const Matrix<T> &);
 
-template <typename T>
-class Vector;
-
-template <typename T>
-Vector<T> operator*(const T &, const Vector<T> &);
+#ifndef MATRIX_IMPL
+#define MATRIX_IMPL
 
 /* ---- Matrix declaration. ---- */
 
@@ -29,11 +26,7 @@ public:
 	const unsigned cols;
 
 public:
-	Matrix(const unsigned &rows, const unsigned &cols) : rows{rows}, cols{cols}
-	{
-		const unsigned int num_entries = rows * cols;
-		data = new T[num_entries]{};
-	}
+	Matrix(const unsigned &, const unsigned &);
 
 	// Explicit deep copy constructor.
 	Matrix(const Matrix<T> &);
@@ -41,10 +34,7 @@ public:
 	// Explicit move constructor;
 	Matrix(Matrix<T> &&other) noexcept;
 
-	~Matrix()
-	{
-		delete[] data;
-	}
+	~Matrix();
 
 	// See: https://isocpp.org/wiki/faq/operator-overloading#matrix-subscript-op
 
@@ -108,6 +98,18 @@ Matrix<T>::operator std::string() const
 }
 
 // Constructors.
+template <typename T>
+Matrix<T>::~Matrix()
+{
+	delete[] data;
+}
+
+template <typename T>
+Matrix<T>::Matrix(const unsigned &rows, const unsigned &cols) : rows{rows}, cols{cols}
+{
+	const unsigned int num_entries = rows * cols;
+	data = new T[num_entries]{};
+}
 
 template <typename T>
 Matrix<T>::Matrix(Matrix<T> &&other) noexcept : data{other.data}, rows{other.rows}, cols{other.cols}
@@ -145,44 +147,4 @@ Matrix<T> operator*(const T &a, const Matrix<T> &m)
 	return result; // Returns new Matrix object.
 }
 
-/* ---- Vector declaration. ---- */
-
-template <typename T>
-class Vector : public Matrix<T>
-{
-public:
-	Vector(const unsigned &rows) : Matrix<T>(rows, 1) {}
-
-	T &operator[](const unsigned &i);
-	T operator[](const unsigned &i) const;
-
-	Vector(const Matrix<T> &mat) : Matrix<T>(mat){};
-	Vector(const Vector<T> &other) : Matrix<T>(other){};
-	Vector(Matrix<T> &&other) : Matrix<T>(other){};
-	Vector(Vector<T> &&other) : Matrix<T>(other){};
-
-	template <typename _>
-	friend Vector<T> operator*(const T &a, const Vector<T> &m);
-};
-
-/* ---- Vector implementation. ---- */
-
-template <typename T>
-T &Vector<T>::operator[](const unsigned &i)
-{
-	return (*this)(i, 0);
-}
-
-template <typename T>
-T Vector<T>::operator[](const unsigned &i) const
-{
-	return (*this)(i, 0);
-}
-
-template <typename T>
-Vector<T> operator*(const T &a, const Vector<T> &m)
-{
-	Matrix<T> mat{m};
-	Matrix<T> result = a * mat;
-	return static_cast<Vector<T>>(std::move(result));
-}
+#endif
