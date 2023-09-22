@@ -44,8 +44,6 @@ Eventually we can implement a basic lazy evaluation scheme for the operations, i
 
 ## Further ideas
 
-First:
-
 - Implement more operations:
   - Matrix transpose: could be done with a derived class overriding access.
   - Matrix-vector product (just need to handle return type).
