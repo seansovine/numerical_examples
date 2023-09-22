@@ -6,7 +6,12 @@ int main() {
   std::string header{"Markov chain steady-state iteration:"};
   std::cout << header << std::endl << std::endl;
 
-  matrix::Matrix<double> m{{0.45, 0.55}, {0.4, 0.6}};
+  // clang-format off
+  matrix::Matrix<double> m{
+    {0.45, 0.55},
+    {0.4,  0.6}
+  };
+  // clang-format on
   // Tends to enter state 1 and stay there.
 
   std::cout << "Transition matrix m =" << std::endl

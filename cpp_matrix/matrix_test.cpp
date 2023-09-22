@@ -2,7 +2,12 @@
 #include <iostream>
 
 int main() {
-  matrix::Matrix<int> m{{1, 1000}, {25, 1}};
+  // clang-format off
+  matrix::Matrix<int> m{
+    {1,  1000},
+    {25, 1}
+  };
+  // clang-format on
   // 2 x 2 matrix.
 
   std::cout << "Original matrix m =" << std::endl
