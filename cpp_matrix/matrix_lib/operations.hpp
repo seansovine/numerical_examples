@@ -3,6 +3,21 @@
 
 namespace matrix {
 
+// Internal helpers
+
+namespace internal {
+
+template <typename T>
+T prodIK_(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i, unsigned k) {
+  T result{};
+  for (unsigned j = 0; j < lhs.cols; j++)
+    result += lhs(i, j) * rhs(j, k);
+
+  return result;
+}
+
+} // namespace internal
+
 /* ---- Scalar products. ---- */
 
 template <typename T> Matrix<T> operator*(const T &a, const Matrix<T> &m) {
@@ -23,15 +38,6 @@ template <typename T> Vector<T> operator*(const T &a, const Vector<T> &m) {
 /* ---- Matrix-Matrix operations. ---- */
 
 template <typename T>
-T prodIK_(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i, unsigned k) {
-  T result{};
-  for (unsigned j = 0; j < lhs.cols; j++)
-    result += lhs(i, j) * rhs(j, k);
-
-  return result;
-}
-
-template <typename T>
 Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs) {
   if (lhs.cols != rhs.rows)
     throw std::domain_error("LHS #cols must match RHS #rows.");
@@ -39,7 +45,7 @@ Matrix<T> operator*(const Matrix<T> &lhs, const Matrix<T> &rhs) {
   Matrix<T> result{lhs.rows, rhs.cols};
   for (unsigned i = 0; i < lhs.rows; i++)
     for (unsigned k = 0; k < rhs.cols; k++)
-      result(i, k) = prodIK_(lhs, rhs, i, k);
+      result(i, k) = internal::prodIK_(lhs, rhs, i, k);
 
   return result;
 } // Basic algorithm.
