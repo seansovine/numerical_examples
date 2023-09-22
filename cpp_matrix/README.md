@@ -54,8 +54,4 @@ First:
 - Use the [Curiously Recurring Template Pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern) for handling inheritance.
 - Use [expression templates](https://en.wikipedia.org/wiki/Expression_templates) for arithmetic operations.
 - Optimize the matrix multiplication -- maybe use BLAS or LAPACK.
-
-And then, maybe:
-
-- Add more convenient way to initialize Matrix, maybe using 2d-array literals.
 - Consider casting scalars, e.g., to allow integer matrix x double matrix.
