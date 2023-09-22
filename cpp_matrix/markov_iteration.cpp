@@ -6,11 +6,8 @@ int main() {
   std::string header{"Markov chain steady-state iteration:"};
   std::cout << header << std::endl << std::endl;
 
-  matrix::Matrix<double> m{2, 2};
-  m(0, 0) = 0.45;
-  m(0, 1) = 0.55;
-  m(1, 0) = 0.4;
-  m(1, 1) = 0.6; // Tends to enter state 1 and stay there.
+  matrix::Matrix<double> m{{0.45, 0.55}, {0.4, 0.6}};
+  // Tends to enter state 1 and stay there.
 
   std::cout << "Transition matrix m =" << std::endl
             << std::string(m) << std::endl

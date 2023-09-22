@@ -1,3 +1,4 @@
+#include <cassert>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -25,6 +26,7 @@ public:
 
 public:
   Matrix(const unsigned &, const unsigned &);
+  Matrix(std::initializer_list<std::initializer_list<T>>);
 
   // Explicit deep copy constructor.
   Matrix(const Matrix<T> &);
@@ -116,6 +118,24 @@ Matrix<T>::Matrix(const unsigned &rows, const unsigned &cols)
     : rows{rows}, cols{cols} {
   const unsigned int num_entries = rows * cols;
   data = new T[num_entries]{};
+}
+
+// Thanks to:
+// https://stackoverflow.com/questions/42068882/list-initialization-for-a-matrix-class
+template <typename T>
+Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> init)
+    : Matrix((unsigned)init.size(), (unsigned)(init.begin())->size()) {
+  unsigned rows = init.size();
+  unsigned cols = (init.begin())->size();
+  for (auto row : init) {
+    unsigned row_cols = row.size();
+    assert(row_cols == cols); // Could improve handling.
+  }
+
+  // Do assignment.
+  for (unsigned i = 0; i < rows; i++)
+    for (unsigned j = 0; j < cols; j++)
+      data[j + i * cols] = ((init.begin() + i)->begin())[j];
 }
 
 template <typename T>

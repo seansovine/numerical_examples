@@ -2,14 +2,8 @@
 #include <iostream>
 
 int main() {
-  matrix::Matrix<int> m{2, 2};
-
+  matrix::Matrix<int> m{{1, 1000}, {25, 1}};
   // 2 x 2 matrix.
-
-  m(0, 0) = 1;
-  m(0, 1) = 1000;
-  m(1, 0) = 25;
-  m(1, 1) = 1;
 
   std::cout << "Original matrix m =" << std::endl
             << std::string(m) << std::endl;
