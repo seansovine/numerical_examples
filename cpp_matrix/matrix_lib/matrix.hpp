@@ -50,7 +50,7 @@ public:
 
 /* ---- Matrix implementation. ---- */
 
-// Operators.
+// Access operators.
 
 template <typename T> T &Matrix<T>::operator()(unsigned row, unsigned col) {
   // Row-major access.
@@ -63,19 +63,27 @@ T Matrix<T>::operator()(unsigned row, unsigned col) const {
   return data[col + row * cols];
 }
 
+// Render matrix to string.
+
 template <typename T> Matrix<T>::operator std::string() const {
   // Compute max width for alignment.
-  unsigned max_width = 0; // Could do per-column.
+  unsigned first_col_max_width = 0;
+  unsigned max_width = 0;
   for (unsigned i = 0; i < rows; i++) {
     for (unsigned j = 0; j < cols; j++) {
       const T &entry = (*this)(i, j);
       std::ostringstream wrd;
       wrd.precision(PRECISION);
       wrd << std::fixed << entry;
-      std::string as_string = wrd.str();
 
+      std::string as_string = wrd.str();
       unsigned width = static_cast<unsigned>(as_string.length());
-      max_width = (width > max_width) ? width : max_width;
+
+      if (j == 0)
+        first_col_max_width =
+            (width > first_col_max_width) ? width : first_col_max_width;
+      else
+        max_width = (width > max_width) ? width : max_width;
     }
   }
 
@@ -86,7 +94,11 @@ template <typename T> Matrix<T>::operator std::string() const {
     for (unsigned j = 0; j < cols; j++) {
       const T &entry = (*this)(i, j);
       std::string as_string = std::to_string(entry);
-      oss << std::setw(max_width + 1) << entry;
+
+      if (j == 0)
+        oss << std::setw(first_col_max_width) << entry;
+      else
+        oss << std::setw(max_width + 1) << entry;
     }
     if (i < rows - 1)
       oss << std::endl;
