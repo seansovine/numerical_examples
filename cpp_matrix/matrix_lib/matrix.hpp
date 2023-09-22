@@ -46,8 +46,7 @@ public:
 
 	explicit operator std::string() const;
 
-	template <typename _> // Is this right?
-	friend Matrix<T> operator*(const T &a, const Matrix<T> &m);
+	friend Matrix<T> operator* <T>(const T &a, const Matrix<T> &m);
 };
 
 /* ---- Matrix implementation. ---- */
