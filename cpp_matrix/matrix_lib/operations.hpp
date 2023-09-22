@@ -8,12 +8,9 @@ Matrix<T> operator*(const T &a, const Matrix<T> &m)
 {
 	Matrix<T> result{m.rows, m.cols};
 	for (unsigned i = 0; i < m.rows; i++)
-	{
 		for (unsigned j = 0; j < m.cols; j++)
-		{
 			result(i, j) = a * m(i, j);
-		}
-	}
+
 	return result; // Returns new Matrix object.
 }
 
@@ -33,6 +30,7 @@ T prodIK_(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i, unsigned k)
 	T result{};
 	for (unsigned j = 0; j < lhs.cols; j++)
 		result += lhs(i, j) * rhs(j, k);
+
 	return result;
 }
 

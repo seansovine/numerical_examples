@@ -147,7 +147,7 @@ Matrix<T>::Matrix(const Matrix<T> &other) : rows{other.rows}, cols{other.cols}
 template <typename T>
 Matrix<T> &Matrix<T>::operator=(const Matrix<T> &other)
 {
-	if (other.rows != this->rows || other.cols != this->cols)
+	if (other.rows != rows || other.cols != cols)
 		throw std::domain_error("Dimensions of assigned matrix must match dimensions of destination matrix.");
 
 	for (unsigned i = 0; i < rows; i++)
