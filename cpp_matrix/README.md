@@ -31,6 +31,12 @@ chmod +x bld
 - Implements scalar multiplication, matrix-matrix addition and multiplication, and the matrix $\infty$-norm.
 - Implements explicit Matrix to string conversion.
 
+_MatrixFunctor:_
+
+We've added a `MatrixFunctor<T>` class template that takes a regular function mapping `const T&` to `T`
+and upgrades it to a function that maps `const Matrix<T>&` to `Matrix<T>` by acting component-wise on
+the matrix. The idea is that this can be used similarly to NumPy's ufuncs.
+
 ## Design decisions
 
 Here are some early decisions that have shaped the design:
