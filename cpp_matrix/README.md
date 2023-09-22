@@ -7,25 +7,13 @@ of a basic but fairly general differential equation solver.
 The current version is not optimized much for efficiency, except for
 some effort to avoid unnecessary object copying.
 
-## Markov chain example
+## Examples
+
+The file `matrix_test.cpp` demonstrates the defined operations on simple examples.
 
 The file `markov_iteration.cpp` uses this library to approximate $\lim_{k\rightarrow\infty}m^k$, where
 $m$ is a stochastic transition matrix. If this limit exists, it is equal to $\mathbf{1}\cdot \pi$,
-where $\pi$ is the steady-state distribution of the Markov chain with transition matrix $m$ and $\mathbf{1}$ is a column vector of $1$'s.
-Example output from a run is:
-
-```text
-Markov chain steady-state iteration:
-
-Transition matrix m =
- 0.550 0.450
- 0.400 0.600
-
-Approximate convergence after 15 iterations.
-Approximate 1 * π for steady state π:
- 0.471 0.529
- 0.471 0.529
-```
+where $\pi$ is the steady-state distribution of the Markov chain with transition matrix $m$ and $\mathbf{1}$ is a column vector of $1$'s. See [Markov chain](https://en.wikipedia.org/wiki/Markov_chain#Time-homogeneous_Markov_chain_with_a_finite_state_space).
 
 ## Building and running
 

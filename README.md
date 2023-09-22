@@ -7,8 +7,8 @@ These are fun exercises and learning tools.
 
 ## `cpp_matrix`
 
-This is a basic C++ matrix class template library.
-There is an example program that uses the library to compute the steady-state of
-a Markov chain. I plan to use this library to help implement a simple differential equation solver.
+This is a basic C++ matrix class template library, with some basic examples
+of its use. I plan to use this library in code I write for other examples,
+so I'll probably keep adding to it as time goes on.
 
 See the project [README](./cpp_matrix/README.md).
