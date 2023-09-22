@@ -11,6 +11,8 @@ all:
 	@echo "Building..."
 	g++ $(flags) $(main_filename).cpp -o build/$(main_filename)
 
+build: all
+
 runner:
 	@./build/$(main_filename)
 

@@ -21,7 +21,7 @@ There is a simple shell script to build and run test scripts using the Makefile 
 
 ```shell
 chmod +x bld
-./bld <filename w/o extension> [run|run_only]
+./bld <filename w/o extension> [build|run|run_only]
 ```
 
 ## Features
