@@ -65,7 +65,6 @@ T Matrix<T>::operator()(unsigned row, unsigned col) const {
 
 template <typename T> Matrix<T>::operator std::string() const {
   // Compute max width for alignment.
-
   unsigned max_width = 0; // Could do per-column.
   for (unsigned i = 0; i < rows; i++) {
     for (unsigned j = 0; j < cols; j++) {
@@ -81,7 +80,6 @@ template <typename T> Matrix<T>::operator std::string() const {
   }
 
   // Build string.
-
   std::stringstream oss{};
   oss << std::fixed << std::setprecision(PRECISION);
   for (unsigned i = 0; i < rows; i++) {
@@ -118,11 +116,9 @@ template <typename T>
 Matrix<T>::Matrix(const Matrix<T> &other) : rows{other.rows}, cols{other.cols} {
   const unsigned int num_entries = rows * cols;
   data = new T[num_entries]{};
-  for (unsigned i = 0; i < rows; i++) {
-    for (unsigned j = 0; j < cols; j++) {
+  for (unsigned i = 0; i < rows; i++)
+    for (unsigned j = 0; j < cols; j++)
       data[j + i * cols] = other(i, j);
-    }
-  }
 }
 
 // Assignment operators.
@@ -132,11 +128,10 @@ template <typename T> Matrix<T> &Matrix<T>::operator=(const Matrix<T> &other) {
     throw std::domain_error("Dimensions of assigned matrix must match "
                             "dimensions of destination matrix.");
 
-  for (unsigned i = 0; i < rows; i++) {
-    for (unsigned j = 0; j < cols; j++) {
+  for (unsigned i = 0; i < rows; i++)
+    for (unsigned j = 0; j < cols; j++)
       data[j + i * cols] = other(i, j);
-    }
-  }
+
   return *this;
 }
 
