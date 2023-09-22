@@ -1,1 +1,3 @@
+Language: Cpp
+ColumnLimit: 80
 NamespaceIndentation: None
