@@ -8,11 +8,12 @@ int main() {
 
   // clang-format off
   matrix::Matrix<double> m{
-    {0.45, 0.55},
-    {0.4,  0.6}
+    {0.4, 0.5, 0.1},
+    {0.3, 0.3, 0.4},
+    {0.1, 0.2, 0.7}
   };
   // clang-format on
-  // Tends to enter state 1 and stay there.
+  // Give tendency towards staying in third state.
 
   std::cout << "Transition matrix m =" << std::endl
             << std::string(m) << std::endl
