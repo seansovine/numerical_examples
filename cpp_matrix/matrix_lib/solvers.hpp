@@ -6,7 +6,7 @@ namespace matrix {
 namespace internal {
 
 template <typename T> Matrix<T> forward_sub(Matrix<T> L, Matrix<T> b) {
-  assert(b.cols = 1);
+  assert(b.cols == 1);
   assert(L.rows == b.rows);
   Matrix<T> v{b.rows, 1};
 
@@ -16,7 +16,7 @@ template <typename T> Matrix<T> forward_sub(Matrix<T> L, Matrix<T> b) {
 }
 
 template <typename T> Matrix<T> back_sub(Matrix<T> U, Matrix<T> v) {
-  assert(v.cols = 1);
+  assert(v.cols == 1);
   assert(U.rows == v.rows);
   Matrix<T> x{v.rows, 1};
 
