@@ -7,5 +7,6 @@
 #include "factorizations.hpp"
 #include "matrix.hpp"
 #include "operations.hpp"
+#include "solvers.hpp"
 #include "utils.hpp"
 #include "vector.hpp"
