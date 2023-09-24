@@ -66,4 +66,34 @@ Matrix<T> linear_solve(const Matrix<T> &A, const Matrix<T> &b) {
   return x;
 }
 
+template <typename T>
+Matrix<T> solve_partial_pivot(const Matrix<T> &A, const Matrix<T> &b) {
+  assert(b.cols == 1);
+  assert(A.rows == b.rows);
+  assert(A.rows == A.cols);
+  unsigned n = A.rows;
+
+  std::pair<Matrix<double>, Matrix<unsigned>> factorization =
+      matrix::LUPartialPivot(A);
+  Matrix<double> M = std::move(factorization.first);
+  Matrix<unsigned> p = std::move(factorization.second);
+
+  Matrix<T> y{b};
+  for (unsigned k = 0; k < n - 1; k++) {
+    // Apply permutation to RHS.
+    T tmp = y(p(k, 0), 0);
+    y(p(k, 0), 0) = y(k, 0);
+    y(k, 0) = tmp;
+    // TODO: User Vector here for clarity.
+
+    // Apply row op to RHS.
+    for (unsigned l = k + 1; l < n; l++) {
+      y(l, 0) = y(l, 0) - y(k, 0) * M(l, k);
+    }
+  }
+
+  Matrix<T> x = internal::back_sub(M, y);
+  return x;
+}
+
 } // namespace matrix
