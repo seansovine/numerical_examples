@@ -60,7 +60,7 @@ Matrix<T> linear_solve(const Matrix<T> &A, const Matrix<T> &b) {
   // Solve Lv = b with forward substitution.
   Matrix<T> v = internal::forward_sub(L, b);
 
-  //   // Solve Ux = v with back substitution.
+  // Solve Ux = v with back substitution.
   Matrix<T> x = internal::back_sub(U, v);
 
   return x;

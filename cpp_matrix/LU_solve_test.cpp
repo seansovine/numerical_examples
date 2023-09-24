@@ -32,8 +32,8 @@ int main() {
   // clang-format on
 
   std::pair<Matrix<double>, Matrix<double>> factorization = matrix::LUFactor(A);
-  Matrix<double> L = factorization.first;
-  Matrix<double> U = factorization.second;
+  Matrix<double> L = std::move(factorization.first);
+  Matrix<double> U = std::move(factorization.second);
 
   std::cout << "Matrix L = " << std::endl
             << std::string(L) << std::endl
