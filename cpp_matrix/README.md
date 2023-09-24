@@ -32,8 +32,8 @@ _Classes:_
 
 - Has a Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
 - Has a Vector subclass representing a column matrix, implementing the subscript operator.
-- A `MatrixFunctor<T>` class template that takes a regular function mapping a `T` to a `T`
-  acts a function that maps a `Matrix<T>` to a `Matrix<T>` by acting component-wise on the matrix.
+- A `MatrixFunctor<T>` class template that takes a regular function `f` mapping a `T` to a `T` and returns an object that
+  acts like a function `F` that maps a `Matrix<T>` to a `Matrix<T>` by applying `f` component-wise.
   Like a very basic version of NumPy ufuncs.
 
 _Operations:_
