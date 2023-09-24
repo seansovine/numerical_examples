@@ -27,6 +27,7 @@ int main() {
   Matrix<double> b{
     {7  },
     {0.2},
+    {29 }
   };
   // clang-format on
 
