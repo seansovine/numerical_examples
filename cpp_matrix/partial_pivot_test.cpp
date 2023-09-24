@@ -36,4 +36,26 @@ int main() {
   std::cout << "Successive permutation vector p = " << std::endl
             << std::string(p) << std::endl
             << std::endl;
+
+  // clang-format off
+  Matrix<double> b{
+    {7  },
+    {0.2},
+    {29 }
+  };
+  // clang-format on
+
+  std::cout << "Matrix b = " << std::endl
+            << std::string(b) << std::endl
+            << std::endl;
+
+  Matrix<double> x = matrix::solve_partial_pivot(A, b);
+  std::cout << "Solution x to Ax = b is:" << std::endl
+            << std::string(x) << std::endl
+            << std::endl;
+
+  Matrix<double> Ax = A * x;
+  std::cout << "Verifying solution: Ax =" << std::endl
+            << std::string(Ax) << std::endl
+            << std::endl;
 }
