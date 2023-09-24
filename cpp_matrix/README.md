@@ -43,7 +43,8 @@ _Operations:_
 
 _Algorithms:_
 
-- I've added a very basic LU factorization algorithm.
+- A very basic LU factorization.
+- A very basic solver for the square, full-rank linear system $Ax= b$, using the $LU$ factorization.
 
 ## Design decisions
 
