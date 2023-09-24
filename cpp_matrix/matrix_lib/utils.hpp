@@ -1,6 +1,9 @@
 #include "matrix.hpp"
 #include "vector.hpp"
 
+#ifndef UTILS_H
+#define UTILS_H
+
 namespace matrix {
 
 /* ---- Norms ---- */
@@ -43,4 +46,16 @@ public:
   }
 };
 
+/* ---- Special Matrix constructors. ---- */
+
+template <typename T> Matrix<T> ident(const unsigned int &n) {
+  Matrix<T> I{n, n};
+  for (unsigned i = 0; i < n; i++) {
+    I(i, i) = 1;
+  }
+  return I;
+}
+
 } // namespace matrix
+
+#endif
