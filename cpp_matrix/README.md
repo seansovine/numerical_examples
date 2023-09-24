@@ -1,13 +1,15 @@
 # Matrix Class Example
 
-In this project we implement basic matrix and vector class templates
-and define the basic operations for matrix and vector objects.
-An eventual goal is to use this library in the implementation
-of a basic but fairly general differential equation solver.
-The current version is not optimized much for efficiency, except for
-some effort to avoid unnecessary object copying.
+This project contains a basic C++ linear algebra library,
+written for learning purposes.
+I will use this library in some other numerical example projects
+that I will add to this repository.
+The current version is not complete or fully optimized for efficiency, but I have
+made some effort to avoid unnecessary object copying.
 
 ## Examples
+
+The main folder contains a few test files, including these:
 
 The file `matrix_test.cpp` demonstrates the defined operations on simple examples.
 
@@ -21,21 +23,27 @@ There is a simple shell script to build and run test scripts using the Makefile 
 
 ```shell
 chmod +x bld
-./bld <filename w/o extension> [build|run|run_only]
+./bld <test filename w/o extension> [build|run|run_only]
 ```
 
 ## Features
 
+_Classes:_
+
 - Has a Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
 - Has a Vector subclass representing a column matrix, implementing the subscript operator.
+- A `MatrixFunctor<T>` class template that takes a regular function mapping a `T` to a `T`
+  acts a function that maps a `Matrix<T>` to a `Matrix<T>` by acting component-wise on the matrix.
+  Like a very basic version of NumPy ufuncs.
+
+_Operations:_
+
 - Implements scalar multiplication, matrix-matrix addition and multiplication, and the matrix $\infty$-norm.
 - Implements explicit Matrix to string conversion.
 
-_MatrixFunctor:_
+_Algorithms:_
 
-We've added a `MatrixFunctor<T>` class template that takes a regular function mapping `const T&` to `T`
-and upgrades it to a function that maps `const Matrix<T>&` to `Matrix<T>` by acting component-wise on
-the matrix. The idea is that this can be used similarly to NumPy's ufuncs.
+- I've added a very basic LU factorization algorithm.
 
 ## Design decisions
 
@@ -54,8 +62,7 @@ Eventually we can implement a basic lazy evaluation scheme for the operations, i
   - Matrix transpose: could be done with a derived class overriding access.
   - Matrix-vector product (just need to handle return type).
   - Vector-vector dot product.
-- Use the Matrix class to implement a simple numerical ODE solver.
 - Use the [Curiously Recurring Template Pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern) for handling inheritance.
-- Use [expression templates](https://en.wikipedia.org/wiki/Expression_templates) for arithmetic operations.
-- Optimize the matrix multiplication -- maybe use BLAS or LAPACK.
+- Use [expression templates](https://en.wikipedia.org/wiki/Expression_templates) for matrix operations.
+- Optimize the matrix multiplication -- maybe use BLAS and LAPACK.
 - Consider casting scalars, e.g., to allow integer matrix x double matrix.
