@@ -1,9 +1,10 @@
 # Numerical Example Projects
 
 This repository contains example projects that I've created while learning
-more computational mathematics. The code in these projects is more
-incomplete and less polished than what I would want in production code.
-These are fun exercises and learning tools.
+more computational mathematics. These projects are just for the sake of learning,
+and the code in them is incomplete and less polished than what I would want for
+production code. For real projects, I would use a well-maintained,
+professional library when possible.
 
 ## `cpp_matrix`
 
