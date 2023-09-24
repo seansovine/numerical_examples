@@ -7,9 +7,6 @@
 
 using matrix::Matrix;
 
-template <typename T>
-std::pair<Matrix<T>, Matrix<T>> LUFactor(const Matrix<T> &);
-
 int main() {
   // clang-format off
   Matrix<double> A{
