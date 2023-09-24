@@ -44,6 +44,9 @@ std::pair<Matrix<T>, Matrix<T>> LUFactor(const Matrix<T> &A) {
  *  Applies the LU w/ partial pivoting algorithm of Golub and Van Loan,
  *  pg. 112. Returns a pair of matrices that can be used to solve
  *  the system Ax = b.
+ *
+ *  Does not explicitly return L of A = LU, but it can be obtained from
+ *  return value (see Golub and Van Loan).
  */
 
 namespace internal {
@@ -59,9 +62,8 @@ template <typename T> unsigned next_row_(const Matrix<T> &m, unsigned step) {
       next = i;
     }
   }
-
-  return next; // Index of largest entry in m(k:n, k).
-}
+  return next;
+} // Return index of largest entry in m(k:n, k).
 
 template <typename T>
 void exchange_row_tails_(Matrix<T> &m, unsigned k, unsigned n) {
