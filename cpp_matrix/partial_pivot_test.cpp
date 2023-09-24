@@ -22,7 +22,8 @@ int main() {
 
   // Do factorization.
 
-  std::cout << "Performing factorization to obtain (M, p) from A." << std::endl
+  std::cout << "Applying partial pivoting algorithm to obtain (M, p) from A."
+            << std::endl
             << std::endl;
 
   std::pair<Matrix<double>, Matrix<unsigned>> factorization =
