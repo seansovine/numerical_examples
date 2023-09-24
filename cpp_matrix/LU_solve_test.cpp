@@ -15,7 +15,7 @@ int main() {
   Matrix<double> A{
     {0.1, 5,   4  },
     {1,   3,   2.3},
-	{23,  0.1, 2  }
+    {23,  0.1, 2  }
   };
   // clang-format on
 
@@ -44,5 +44,14 @@ int main() {
   Matrix<double> LU = L * U;
   std::cout << "Verify, L*U = " << std::endl
             << std::string(LU) << std::endl
+            << std::endl;
+
+  std::cout << "Matrix b = " << std::endl
+            << std::string(b) << std::endl
+            << std::endl;
+
+  Matrix<double> x = matrix::linear_solve(A, b);
+  std::cout << "Solution x to Ax = b is:" << std::endl
+            << std::string(x) << std::endl
             << std::endl;
 }
