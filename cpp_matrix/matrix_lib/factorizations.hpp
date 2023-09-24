@@ -79,7 +79,7 @@ std::pair<Matrix<T>, Matrix<unsigned>> LUPartialPivot(const Matrix<T> &A) {
   assert(A.rows == A.cols);
   unsigned int n = A.rows;
 
-  Matrix<unsigned> p{n, 1};
+  Matrix<unsigned> p{n - 1, 1};
   Matrix<T> M{A};
 
   // Do the factorization.
