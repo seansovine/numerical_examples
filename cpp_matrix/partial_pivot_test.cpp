@@ -2,7 +2,7 @@
 #include <iostream>
 
 /**
- *  First example using LU w/ pivoting to solve a system Ax = b.
+ *  Testing out LU w/ partial pivot and accompanying solver.
  */
 
 using matrix::Matrix;
@@ -20,20 +20,22 @@ int main() {
             << std::string(A) << std::endl
             << std::endl;
 
-  std::pair<Matrix<double>, Matrix<double>> factorization = matrix::LUFactor(A);
-  Matrix<double> L = std::move(factorization.first);
-  Matrix<double> U = std::move(factorization.second);
+  // Do factorization.
 
-  std::cout << "Matrix L = " << std::endl
-            << std::string(L) << std::endl
-            << std::endl;
-  std::cout << "Matrix U = " << std::endl
-            << std::string(U) << std::endl
+  std::cout << "Applying partial pivoting algorithm to obtain (M, p) from A."
+            << std::endl
             << std::endl;
 
-  Matrix<double> LU = L * U;
-  std::cout << "Verify, L*U = " << std::endl
-            << std::string(LU) << std::endl
+  std::pair<Matrix<double>, Matrix<unsigned>> factorization =
+      matrix::LUPartialPivot(A);
+  Matrix<double> M = std::move(factorization.first);
+  Matrix<unsigned> p = std::move(factorization.second);
+
+  std::cout << "Matrix M = " << std::endl
+            << std::string(M) << std::endl
+            << std::endl;
+  std::cout << "Successive permutation vector p = " << std::endl
+            << std::string(p) << std::endl
             << std::endl;
 
   // clang-format off
@@ -48,7 +50,7 @@ int main() {
             << std::string(b) << std::endl
             << std::endl;
 
-  Matrix<double> x = matrix::linear_solve(A, b);
+  Matrix<double> x = matrix::solve_partial_pivot(A, b);
   std::cout << "Solution x to Ax = b is:" << std::endl
             << std::string(x) << std::endl
             << std::endl;
