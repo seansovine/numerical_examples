@@ -20,14 +20,6 @@ int main() {
             << std::string(A) << std::endl
             << std::endl;
 
-  // clang-format off
-  Matrix<double> b{
-    {7  },
-    {0.2},
-    {29 }
-  };
-  // clang-format on
-
   std::pair<Matrix<double>, Matrix<double>> factorization = matrix::LUFactor(A);
   Matrix<double> L = std::move(factorization.first);
   Matrix<double> U = std::move(factorization.second);
@@ -43,6 +35,14 @@ int main() {
   std::cout << "Verify, L*U = " << std::endl
             << std::string(LU) << std::endl
             << std::endl;
+
+  // clang-format off
+  Matrix<double> b{
+    {7  },
+    {0.2},
+    {29 }
+  };
+  // clang-format on
 
   std::cout << "Matrix b = " << std::endl
             << std::string(b) << std::endl
