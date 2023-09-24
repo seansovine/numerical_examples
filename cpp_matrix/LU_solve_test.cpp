@@ -55,4 +55,9 @@ int main() {
   std::cout << "Solution x to Ax = b is:" << std::endl
             << std::string(x) << std::endl
             << std::endl;
+
+  Matrix<double> Ax = A * x;
+  std::cout << "Verifying solution: Ax =" << std::endl
+            << std::string(Ax) << std::endl
+            << std::endl;
 }
