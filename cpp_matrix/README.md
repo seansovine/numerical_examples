@@ -43,6 +43,7 @@ _Operations:_
 
 _Algorithms:_
 
+- A solver for the square system $Ax = b$ based on the LU w/ partial pivoting algorithm in Golub and Van Loan.
 - A very basic LU factorization.
 - A very basic solver for the square, full-rank linear system $Ax= b$, using the $LU$ factorization.
 
