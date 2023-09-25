@@ -96,6 +96,13 @@ Matrix<T> solve_partial_pivot(const Matrix<T> &A, const Matrix<T> &b) {
     }
   }
 
+  // Check for singular matrix.
+  for (unsigned k = 0; k < n; k++) {
+    if (M(k, k) == 0)
+      throw std::domain_error(
+          "Matrix is A singular; cannot guarantee solution exists.");
+  }
+
   Matrix<T> x = internal::back_sub(M, y);
   return x;
 }
