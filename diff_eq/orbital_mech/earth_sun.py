@@ -62,7 +62,7 @@ DT = SIM_RATE * DT_FRAC
 TOT_SIM_SECS = 710  # Sim time if animation timing is accurate.
 TOT_REAL_T = SIM_RATE * TOT_SIM_SECS  # Total elapsed real-world seconds.
 
-# Total number of steps
+# Total number of steps, including initial
 TOT_STEPS = int(TOT_REAL_T / DT) + 1
 
 
@@ -113,7 +113,7 @@ ax = plt.axes(
 )
 
 # Filled circle representing the sun,
-# maginfied to twice it's actual relative size.
+# maginfied to twice its actual relative size.
 SUN_DISP_RAD = 2 * SUN_RADIUS
 circle = plt.Circle(xy=(0, 0), radius=SUN_DISP_RAD, color="black")
 ax.add_artist(circle)
