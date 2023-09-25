@@ -50,6 +50,8 @@ int main() {
             << std::string(b) << std::endl
             << std::endl;
 
+  // Solve system.
+
   Matrix<double> x = matrix::solve_partial_pivot(A, b);
   std::cout << "Solution x to Ax = b is:" << std::endl
             << std::string(x) << std::endl
