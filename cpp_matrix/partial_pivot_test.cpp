@@ -61,4 +61,22 @@ int main() {
   std::cout << "Verifying solution: Ax =" << std::endl
             << std::string(Ax) << std::endl
             << std::endl;
+
+  // Compute matrix rank.
+
+  std::cout << "------" << std::endl << std::endl;
+
+  // clang-format off
+  A = {
+    {0.1, 5,   4  },
+    {0.1, 5,   4  },
+    {23,  0.1, 2  }
+  };
+  // clang-format on
+
+  std::cout << "Modified matrix A = " << std::endl
+            << std::string(A) << std::endl
+            << std::endl;
+
+  std::cout << "Rank of A is: " << matrix::rank(A) << std::endl << std::endl;
 }

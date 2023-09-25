@@ -104,4 +104,17 @@ std::pair<Matrix<T>, Matrix<unsigned>> LUPartialPivot(const Matrix<T> &A) {
   return std::pair<Matrix<T>, Matrix<unsigned>>{M, p};
 }
 
+template <typename T> unsigned rank(const Matrix<T> &A) {
+  std::pair<Matrix<double>, Matrix<unsigned>> factorization =
+      matrix::LUPartialPivot(A);
+  Matrix<double> M = std::move(factorization.first);
+
+  unsigned rank = 0;
+  for (unsigned i = 0; i < M.cols; i++)
+    if (M(i, i) != 0.0)
+      rank++;
+
+  return rank;
+}
+
 } // namespace matrix
