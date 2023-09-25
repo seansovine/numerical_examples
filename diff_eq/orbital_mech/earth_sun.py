@@ -60,7 +60,7 @@ DT = SIM_RATE * DT_FRAC
 
 # Total real-world and simulation times.
 TOT_SIM_SECS = 710  # Sim time if animation timing is accurate.
-TOT_REAL_T = SIM_RATE * TOT_SIM_SECS
+TOT_REAL_T = SIM_RATE * TOT_SIM_SECS  # Total elapsed real-world seconds.
 
 # Total number of steps
 TOT_STEPS = int(TOT_REAL_T / DT) + 1
@@ -137,18 +137,15 @@ def update_plt(t):
 
 # Only plot every nth time-step.
 SAMPLE_RATE = 50
-# Effectively speeds up the animation,
-# since there are limits to how many frames per
-# second the machine can display.
+# Effectively speeds up the animation, since there are limits to
+# how many frames per second the machine can display.
 
 
 ANIM_TIME_MULT = 10.0  # Speed-up factor.
 ANIM_INTER_MILIS = 1000 * DT_FRAC / ANIM_TIME_MULT
-# In theory w/ MULT = 1 and SAMPLE_ATE = 1,
-# this should make the actual
-# time of the animation match the simulation time.
-# But there are limits to how fast the animation can
-# display frames.
+# In theory w/ ANIM_TIME_MULT = 1 and SAMPLE_RATE = 1,
+# this should make the actual time of the animation match the simulation time.
+# But there are limits to how fast the animation can display frames.
 
 print(f"\nRequested milliseconds between frames: {ANIM_INTER_MILIS}")
 
