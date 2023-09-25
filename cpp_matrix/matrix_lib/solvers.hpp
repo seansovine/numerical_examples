@@ -66,6 +66,10 @@ Matrix<T> linear_solve(const Matrix<T> &A, const Matrix<T> &b) {
   return x;
 }
 
+/**
+ *  Partial pivoting algorithm from Golub and Van Loan.
+ */
+
 template <typename T>
 Matrix<T> solve_partial_pivot(const Matrix<T> &A, const Matrix<T> &b) {
   assert(b.cols == 1);
