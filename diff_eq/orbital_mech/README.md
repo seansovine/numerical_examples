@@ -4,7 +4,7 @@ This project has a Python script to simulate the Earth's orbit around the Sun
 in two dimensions,
 with the initial distance from Sun and initial velocity parameters
 shifted by various amounts from their realistic values. It produces an animation and saves it to
-an mp4 files, using the matplotlib `FuncAnimation` class.
+a gif file, using the matplotlib `FuncAnimation` class.
 
 Right now it's just using the basic Euler method to approximate the solution to
 Newton's equation.

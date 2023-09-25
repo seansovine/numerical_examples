@@ -58,8 +58,8 @@ SIM_RATE = 5.03693e5  # Seconds of real time per second of sim time.
 DT_FRAC = 1e-2
 DT = SIM_RATE * DT_FRAC
 
-# Total real time.
-TOT_SIM_SECS = 600
+# Total real-world time.
+TOT_SIM_SECS = 710
 TOT_REAL_T = SIM_RATE * TOT_SIM_SECS  # So TOT_SIM_SECS of sim time.
 
 # Total number of steps
@@ -93,7 +93,6 @@ print(f"Total time steps in simulation: {TOT_STEPS}")
 
 trajectory = np.zeros(shape=(TOT_STEPS + 1, 4), dtype=np.float64)
 trajectory[0] = INIT_Z
-
 print(f"Initial values: {trajectory[0]}\n")
 
 print("Running simulation:")
@@ -137,11 +136,11 @@ def update_plt(t):
 # update_plt(STOP)
 
 # Num milliseconds between frames of animation.
-SAMPLE_RATE = 10  # Only plot every nth time-step.
+SAMPLE_RATE = 50  # Only plot every nth time-step.
 # Effectively speeds up animation.
 # 10 means the Earth reaches the Sun in 1 second.
 
-ANIM_TIME_MULT = 1.0  # Speed-up factor.
+ANIM_TIME_MULT = 10.0  # Speed-up factor.
 ANIM_INTER_MILIS = 1000 * DT_FRAC / ANIM_TIME_MULT
 # So that 1 real sec = 1 sim sec, as defined above.
 
@@ -152,12 +151,18 @@ ani = anim.FuncAnimation(
     func=update_plt,
     init_func=init,
     frames=range(0, TOT_STEPS + 1, SAMPLE_RATE),
-    interval=1,
+    interval=ANIM_INTER_MILIS,
     blit=False,
     repeat=False,
 )
 
-# Uncomment to save the animation.
-ani.save("orbit_animation.mp4", fps=30, extra_args=["-vcodec", "libx264"])
+SAVE = False
+SHOW = True
 
-plt.show()
+if SAVE:
+    print("Saving animation to file.")
+    ani.save("orbit_animation_fast.gif", dpi=100, writer=anim.PillowWriter(fps=25))
+    print("Save complete.")
+
+if SHOW:
+    plt.show()
