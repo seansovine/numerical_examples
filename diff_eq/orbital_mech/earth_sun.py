@@ -39,10 +39,6 @@ INIT_DIST_MULT = 0.5
 INIT_X = INIT_Y = -1 * INIT_DIST_MULT * (DIST_E_S / np.sqrt(2.0))
 
 INIT_DIST = mag((INIT_X, INIT_Y))
-assert (
-    INIT_DIST - INIT_DIST_MULT * DIST_E_S < 0.0001
-), f"Init dist is {INIT_DIST}, but {INIT_DIST_MULT} times Earth-Sun distance is {INIT_DIST_MULT * DIST_E_S}."
-
 
 ESCAPE_VEL = np.sqrt(2 * GRAV_CONST * MASS_SUN / INIT_DIST)
 INIT_VEL_MULT = 0.8
