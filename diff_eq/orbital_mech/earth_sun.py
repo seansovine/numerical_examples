@@ -43,7 +43,7 @@ INIT_Z = [
     INIT_VEL_MULT * math.sin(INIT_ANGLE) * E_VEL,
 ]
 
-## Discretization.
+## Discretization parameters.
 
 # Sim rate chosen so that body reaches the "sun"
 # in aproximately 10 seconds of simulation time.
@@ -64,6 +64,9 @@ TOT_REAL_T = SIM_RATE * TOT_SIM_SECS  # Total elapsed real-world seconds.
 
 # Total number of steps
 TOT_STEPS = int(TOT_REAL_T / DT) + 1
+
+
+## Simulation functions
 
 
 def d_dt(z):
@@ -87,7 +90,7 @@ def simulate(trajectory):
             print(f"               point: {trajectory[t]}")
 
 
-## Do simulation.
+## Run simulation.
 
 print(f"Total time steps in simulation: {TOT_STEPS}")
 
@@ -99,7 +102,7 @@ print("Running simulation:")
 simulate(trajectory)
 
 
-## Plot the trajectory.
+## Setup for plotting the trajectory.
 
 DIM_MULT = 2.0
 PLOT_DIM = int(DIM_MULT * DIST_E_S)
@@ -110,7 +113,7 @@ ax = plt.axes(
 )
 
 # Filled circle representing the sun,
-# maginfied two twice it's actual relative size.
+# maginfied to twice it's actual relative size.
 SUN_DISP_RAD = 2 * SUN_RADIUS
 circle = plt.Circle(xy=(0, 0), radius=SUN_DISP_RAD, color="black")
 ax.add_artist(circle)
@@ -158,6 +161,8 @@ ani = anim.FuncAnimation(
     blit=False,
     repeat=False,
 )
+
+## Plot and/or save the results.
 
 SAVE = False
 SHOW = True
