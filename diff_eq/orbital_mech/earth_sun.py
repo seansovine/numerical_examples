@@ -4,19 +4,22 @@ Simulates a planetary body moving in the gravity field of
 a body as massive as the sun, in two dimensions.
 """
 
-import math
-
 import matplotlib.pyplot as plt
 import matplotlib.animation as anim
 import numpy as np
 
+
+def mag(r):
+    return np.sqrt(r[0] ** 2 + r[1] ** 2)
+
+
 ## Constants.
 
 # Gravitational constant.
-GRAV = 6.67430e-11  # m^3/ (kg * s^2)
+GRAV_CONST = 6.67430e-11  # m^3/ (kg * s^2)
 
 # Mass of sun.
-M_SUN = 1.989e30  # kg
+MASS_SUN = 1.989e30  # kg
 
 # Distance of Earth to sun.
 DIST_E_S = 150e9  # m
@@ -27,20 +30,30 @@ SUN_RADIUS = 6.96e8  # m
 # Earth's average orbital velocity.
 E_VEL = 29.78e3  # m/s
 
-NEWT_CONST = GRAV * M_SUN
 
 ## Initial values.
 
-INIT_VEL_MULT = 2.0
-INIT_ANGLE = 2.25 * math.pi / 4.0
-INIT_DIST_MULT = 0.25
+INIT_ANGLE = 3.0 * np.pi / 4.0
+
+INIT_DIST_MULT = 0.5
+INIT_X = INIT_Y = -1 * INIT_DIST_MULT * (DIST_E_S / np.sqrt(2.0))
+
+INIT_DIST = mag((INIT_X, INIT_Y))
+assert (
+    INIT_DIST - INIT_DIST_MULT * DIST_E_S < 0.0001
+), f"Init dist is {INIT_DIST}, but {INIT_DIST_MULT} times Earth-Sun distance is {INIT_DIST_MULT * DIST_E_S}."
+
+
+ESCAPE_VEL = np.sqrt(2 * GRAV_CONST * MASS_SUN / INIT_DIST)
+INIT_VEL_MULT = 0.8
+INIT_VEL = INIT_VEL_MULT * ESCAPE_VEL / np.sqrt(2.0)
 
 # Initial conditions of position and velocity: [x, y, v_x, v_y]
-INIT_Z = [
-    INIT_DIST_MULT * -DIST_E_S,
-    INIT_DIST_MULT * -DIST_E_S,
-    INIT_VEL_MULT * math.cos(INIT_ANGLE) * E_VEL,
-    INIT_VEL_MULT * math.sin(INIT_ANGLE) * E_VEL,
+INIT_POS = [
+    INIT_X,
+    INIT_Y,
+    INIT_VEL * np.cos(INIT_ANGLE),
+    INIT_VEL * np.sin(INIT_ANGLE),
 ]
 
 ## Discretization parameters.
@@ -55,11 +68,11 @@ SIM_RATE = 5.03693e5  # Seconds of real time per second of sim time.
 # So 1 sim sec. = 0.1 Earth-Sun travel time unit.
 
 # Real unit time step length
-DT_FRAC = 1e-2
+DT_FRAC = 1e-4
 DT = SIM_RATE * DT_FRAC
 
 # Total real-world and simulation times.
-TOT_SIM_SECS = 710  # Sim time if animation timing is accurate.
+TOT_SIM_SECS = 300  # Sim time if animation timing is accurate.
 TOT_REAL_T = SIM_RATE * TOT_SIM_SECS  # Total elapsed real-world seconds.
 
 # Total number of steps, including initial
@@ -69,47 +82,59 @@ TOT_STEPS = int(TOT_REAL_T / DT) + 1
 ## Simulation functions
 
 
+NEWTON_CONST = GRAV_CONST * MASS_SUN
+
+
 def d_dt(z):
     """RHS of Newton's second-law as first-order system."""
-    dist_cubed = (z[0] ** 2 + z[1] ** 2) ** (3 / 2)
-    mag = NEWT_CONST / dist_cubed
-    return np.asarray([z[2], z[3], -z[0] * mag, -z[1] * mag])
+    dist_cubed = mag(z[0:2]) ** 3
+    mult = NEWTON_CONST / dist_cubed
+    return np.asarray([z[2], z[3], -z[0] * mult, -z[1] * mult])
 
 
 def simulate(trajectory):
     """
-    Run a basic Euler method approximation to populate
-    the trajectory array.
+    Run a basic Euler method approximation to
+    populate the trajectory array.
     """
     for t in range(1, TOT_STEPS + 1):
+        sun_dist = mag(trajectory[t - 1][0:2])
+        if t % 100000 == 0:
+            print(f"Time step {t:7d} sun distance: {sun_dist:.4E}")
+        if sun_dist < 5 * SUN_RADIUS:
+            trajectory[t] = trajectory[t - 1]
+            print(f"Too close to sun. Distance: {sun_dist}")
+            continue
         deriv = d_dt(trajectory[t - 1])
         delta = DT * deriv
         trajectory[t] = trajectory[t - 1] + delta
-        if t % 100 == 0:
-            print(f"Time step {t:4d} deriv: {deriv}")
-            print(f"               point: {trajectory[t]}")
+
+    print()
 
 
 ## Run simulation.
 
 print(f"Total time steps in simulation: {TOT_STEPS}")
 
-trajectory = np.zeros(shape=(TOT_STEPS + 1, 4), dtype=np.float64)
-trajectory[0] = INIT_Z
+trajectory = np.zeros(shape=(TOT_STEPS + 1, 4), dtype=np.float128)
+trajectory[0] = INIT_POS
 print(f"Initial values: {trajectory[0]}\n")
 
-print("Running simulation:")
+print("Running simulation.")
 simulate(trajectory)
 
 
 ## Setup for plotting the trajectory.
 
-DIM_MULT = 2.0
+DIM_MULT = 4
 PLOT_DIM = int(DIM_MULT * DIST_E_S)
+LSHIFT = 0.5
+DSHIFT = 0.5
 
 fig = plt.figure()
 ax = plt.axes(
-    xlim=(-0.5 * PLOT_DIM, 1.5 * PLOT_DIM), ylim=(-1.5 * PLOT_DIM, 0.5 * PLOT_DIM)
+    xlim=(-(1.0 - LSHIFT) * PLOT_DIM, (1.0 + LSHIFT) * PLOT_DIM),
+    ylim=(-(1.0 - DSHIFT) * PLOT_DIM, (1.0 + DSHIFT) * PLOT_DIM),
 )
 
 # Filled circle representing the sun,
@@ -139,7 +164,7 @@ def update_plt(t):
 # update_plt(STOP)
 
 # Only plot every nth time-step.
-SAMPLE_RATE = 50
+SAMPLE_RATE = 5000
 # Effectively speeds up the animation, since there are limits to
 # how many frames per second the machine can display.
 
@@ -150,7 +175,7 @@ ANIM_INTER_MILIS = 1000 * DT_FRAC / ANIM_TIME_MULT
 # this should make the actual time of the animation match the simulation time.
 # But there are limits to how fast the animation can display frames.
 
-print(f"\nRequested milliseconds between frames: {ANIM_INTER_MILIS}")
+print(f"Requested milliseconds between frames: {ANIM_INTER_MILIS}")
 
 ani = anim.FuncAnimation(
     fig=fig,
