@@ -1,12 +1,11 @@
 # Earth-Sun Orbit Simulator
 
-This project has a Python script to simulate the Earth's orbit around the Sun
-in two dimensions,
-with the initial distance from Sun and initial velocity parameters
-shifted by various amounts from their realistic values. It produces an animation and saves it to
-a gif file, using the matplotlib `FuncAnimation` class.
+This project has a Python script that simulates the Earth's orbit around the Sun,
+with the initial distance from Sun and initial velocity magnitude and direction
+changed by small multiples from their realistic values. It produces an animation and saves it to
+a gif file using the matplotlib `FuncAnimation` class.
 
-Right now it's just using the basic Euler method to approximate the solution to
+The simulation is currently using the basic Euler method to approximate the solution to
 Newton's equation.
 
 The time-step of the simulation is scaled so that Earth would reach the sun
