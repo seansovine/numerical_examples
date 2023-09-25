@@ -13,3 +13,8 @@ of its use. I plan to use this library in code I write for other examples,
 so I'll probably keep adding to it as time goes on.
 
 See the project [README](./cpp_matrix/README.md).
+
+## `diff_eq`
+
+This folder contains projects for modeling with ordinary and partial differential equations
+and computing and visualizing numerical approximations of their solutions.

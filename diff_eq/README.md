@@ -1,6 +1,6 @@
 # Numerical Differential Equations
 
-This folder will contain projects for modeling with ordinary and partial differential equations
+Projects for modeling with ordinary and partial differential equations
 and computing and visualizing numerical approximations of their solutions.
 
 ## `orbital_mech`
