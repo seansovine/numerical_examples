@@ -41,7 +41,7 @@ INIT_X = INIT_Y = -1 * INIT_DIST_MULT * (DIST_E_S / np.sqrt(2.0))
 INIT_DIST = mag((INIT_X, INIT_Y))
 
 ESCAPE_VEL = np.sqrt(2 * GRAV_CONST * MASS_SUN / INIT_DIST)
-INIT_VEL_MULT = 0.8
+INIT_VEL_MULT = 1.0
 INIT_VEL = INIT_VEL_MULT * ESCAPE_VEL / np.sqrt(2.0)
 
 # Initial conditions of position and velocity: [x, y, v_x, v_y]
@@ -85,7 +85,7 @@ def d_dt(z):
     """RHS of Newton's second-law as first-order system."""
     dist_cubed = mag(z[0:2]) ** 3
     mult = NEWTON_CONST / dist_cubed
-    return np.asarray([z[2], z[3], -z[0] * mult, -z[1] * mult])
+    return np.asarray([z[2], z[3], -z[0] * mult, -z[1] * mult], dtype=np.float128)
 
 
 def simulate(trajectory):
@@ -122,10 +122,10 @@ simulate(trajectory)
 
 ## Setup for plotting the trajectory.
 
-DIM_MULT = 4
+DIM_MULT = 1.5
 PLOT_DIM = int(DIM_MULT * DIST_E_S)
-LSHIFT = 0.5
-DSHIFT = 0.5
+LSHIFT = 0.0
+DSHIFT = 0.0
 
 fig = plt.figure()
 ax = plt.axes(
