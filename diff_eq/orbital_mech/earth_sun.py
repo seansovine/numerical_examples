@@ -58,9 +58,9 @@ SIM_RATE = 5.03693e5  # Seconds of real time per second of sim time.
 DT_FRAC = 1e-2
 DT = SIM_RATE * DT_FRAC
 
-# Total real-world time.
-TOT_SIM_SECS = 710
-TOT_REAL_T = SIM_RATE * TOT_SIM_SECS  # So TOT_SIM_SECS of sim time.
+# Total real-world and simulation times.
+TOT_SIM_SECS = 710  # Sim time if animation timing is accurate.
+TOT_REAL_T = SIM_RATE * TOT_SIM_SECS
 
 # Total number of steps
 TOT_STEPS = int(TOT_REAL_T / DT) + 1
@@ -135,16 +135,22 @@ def update_plt(t):
 # STOP = int(0.4 * (TOT_STEPS + 1))
 # update_plt(STOP)
 
-# Num milliseconds between frames of animation.
-SAMPLE_RATE = 50  # Only plot every nth time-step.
-# Effectively speeds up animation.
-# 10 means the Earth reaches the Sun in 1 second.
+# Only plot every nth time-step.
+SAMPLE_RATE = 50
+# Effectively speeds up the animation,
+# since there are limits to how many frames per
+# second the machine can display.
+
 
 ANIM_TIME_MULT = 10.0  # Speed-up factor.
 ANIM_INTER_MILIS = 1000 * DT_FRAC / ANIM_TIME_MULT
-# So that 1 real sec = 1 sim sec, as defined above.
+# In theory w/ MULT = 1 and SAMPLE_ATE = 1,
+# this should make the actual
+# time of the animation match the simulation time.
+# But there are limits to how fast the animation can
+# display frames.
 
-print(f"\nMilliseconds between frames: {ANIM_INTER_MILIS}")
+print(f"\nRequested milliseconds between frames: {ANIM_INTER_MILIS}")
 
 ani = anim.FuncAnimation(
     fig=fig,
