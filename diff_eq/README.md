@@ -1,11 +1,10 @@
 # Numerical Differential Equations
 
 Projects for modeling with ordinary and partial differential equations
-and computing and visualizing numerical approximations of their solutions.
+and computing numerical approximations to their solutions.
 
 ## `orbital_mech`
 
-This project has a Python script that simulates the Earth's orbit around the Sun,
-with the initial distance from Sun and initial velocity magnitude and direction
-changed by small multiples from their realistic values. It produces an animation and saves it to
-a gif file.
+Right now this project has a small Python script that simulates a body orbiting a
+much more massive body, using Newton's law of gravitation to approximate Keplerian
+orbits. I'd like to add some more simulations from celestial mechanics.
