@@ -19,6 +19,7 @@ NEWTON_CONST = GRAV_CONST * SUN_MASS
 
 
 def norm(r):
+    """Compute distance of 2D point from origin."""
     return np.sqrt(r[0] ** 2 + r[1] ** 2)
 
 
@@ -57,7 +58,6 @@ SAMPLES = 2501
 t = np.linspace(0, 1000, SAMPLES)
 
 trajectory = integ.odeint(dr_dt, r0, t)
-# print(trajectory)
 
 ## Setup for plotting the trajectory.
 
@@ -71,8 +71,7 @@ ax = plt.axes(
     ylim=(-(1.0 - DSHIFT) * PLOT_DIM, (1.0 + DSHIFT) * PLOT_DIM),
 )
 
-# Filled circle representing the sun,
-# maginfied to twice its actual relative size.
+# Filled circle representing the sun.
 SUN_DISP_RAD = 0.1
 circle = plt.Circle(xy=(0, 0), radius=SUN_DISP_RAD, color="black")
 ax.add_artist(circle)
@@ -83,14 +82,12 @@ ax.add_artist(circle)
 
 def init():
     line.set_data([], [])
-    # return (line,) # Unneeded b/c blit=False.
 
 
 def update_plt(n):
     x_traj = trajectory[:n, 0]
     y_traj = trajectory[:n, 1]
     line.set_data(x_traj, y_traj)
-    # return (line,)
 
 
 ## Plot the trajectory
