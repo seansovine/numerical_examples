@@ -33,24 +33,30 @@ E_VEL = 29.78e3  # m/s
 
 ## Initial values.
 
-INIT_ANGLE = 3.0 * np.pi / 4.0
+INIT_ANGLE = 2.25 * np.pi / 4.0
 
-INIT_DIST_MULT = 0.5
-INIT_X = INIT_Y = -1 * INIT_DIST_MULT * (DIST_E_S / np.sqrt(2.0))
+
+INIT_X = -0.75 * (DIST_E_S)
+INIT_Y = -1.5 * (DIST_E_S)
 
 INIT_DIST = mag((INIT_X, INIT_Y))
 
 ESCAPE_VEL = np.sqrt(2 * GRAV_CONST * MASS_SUN / INIT_DIST)
-INIT_VEL_MULT = 1.0
+INIT_VEL_MULT = 1.7
 INIT_VEL = INIT_VEL_MULT * ESCAPE_VEL / np.sqrt(2.0)
 
 # Initial conditions of position and velocity: [x, y, v_x, v_y]
-INIT_POS = [
-    INIT_X,
-    INIT_Y,
-    INIT_VEL * np.cos(INIT_ANGLE),
-    INIT_VEL * np.sin(INIT_ANGLE),
-]
+INIT_POS = (
+    np.asarray(
+        [
+            INIT_X,
+            INIT_Y,
+            INIT_VEL * np.cos(INIT_ANGLE),
+            INIT_VEL * np.sin(INIT_ANGLE),
+        ]
+    )
+    / DIST_E_S
+)
 
 ## Discretization parameters.
 
@@ -68,7 +74,7 @@ DT_FRAC = 1e-4
 DT = SIM_RATE * DT_FRAC
 
 # Total real-world and simulation times.
-TOT_SIM_SECS = 300  # Sim time if animation timing is accurate.
+TOT_SIM_SECS = 120  # Sim time if animation timing is accurate.
 TOT_REAL_T = SIM_RATE * TOT_SIM_SECS  # Total elapsed real-world seconds.
 
 # Total number of steps, including initial
@@ -77,8 +83,7 @@ TOT_STEPS = int(TOT_REAL_T / DT) + 1
 
 ## Simulation functions
 
-
-NEWTON_CONST = GRAV_CONST * MASS_SUN
+NEWTON_CONST = (GRAV_CONST / DIST_E_S**3) * MASS_SUN
 
 
 def d_dt(z):
@@ -95,9 +100,9 @@ def simulate(trajectory):
     """
     for t in range(1, TOT_STEPS + 1):
         sun_dist = mag(trajectory[t - 1][0:2])
-        if t % 100000 == 0:
+        if t % 10000 == 0:
             print(f"Time step {t:7d} sun distance: {sun_dist:.4E}")
-        if sun_dist < 5 * SUN_RADIUS:
+        if sun_dist < 5 * SUN_RADIUS / DIST_E_S:
             trajectory[t] = trajectory[t - 1]
             print(f"Too close to sun. Distance: {sun_dist}")
             continue
@@ -122,8 +127,7 @@ simulate(trajectory)
 
 ## Setup for plotting the trajectory.
 
-DIM_MULT = 1.5
-PLOT_DIM = int(DIM_MULT * DIST_E_S)
+PLOT_DIM = 6.0
 LSHIFT = 0.0
 DSHIFT = 0.0
 
@@ -135,7 +139,7 @@ ax = plt.axes(
 
 # Filled circle representing the sun,
 # maginfied to twice its actual relative size.
-SUN_DISP_RAD = 2 * SUN_RADIUS
+SUN_DISP_RAD = 2 * SUN_RADIUS / DIST_E_S
 circle = plt.Circle(xy=(0, 0), radius=SUN_DISP_RAD, color="black")
 ax.add_artist(circle)
 
@@ -160,7 +164,7 @@ def update_plt(t):
 # update_plt(STOP)
 
 # Only plot every nth time-step.
-SAMPLE_RATE = 5000
+SAMPLE_RATE = 500
 # Effectively speeds up the animation, since there are limits to
 # how many frames per second the machine can display.
 
