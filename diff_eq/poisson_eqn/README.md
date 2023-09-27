@@ -35,8 +35,10 @@ which could be the case if the region were enclosed in a metallic box.
 
 Here is a heatmap plot of the solution obtained:
 
-<p align="center" style="padding: 2em;">
+<p align="center" style="margin: 3em;">
 <img src="poisson_example.png" width="500" height="459">
 </p>
 
 **Note:** I apologize in advance for any inaccuracies in my physics in the description above.
+I also haven't included any discussion of issues like the accuracy of the approximation, but I would
+like to include a brief discussion in future examples.
