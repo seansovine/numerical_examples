@@ -35,8 +35,8 @@ which could be the case if the region were enclosed in a metallic box.
 
 Here is a heatmap plot of the solution obtained:
 
-<div style="margin-top: 3em; margin-bottom: 3em; text-align: center;">
-	<img src="poisson_example.png"  width="500" height="459" >
-</div>
+<p align="center" style="padding: 2em;">
+<img src="poisson_example.png" width="500" height="459">
+</p>
 
 **Note:** I apologize in advance for any inaccuracies in my physics in the description above.
