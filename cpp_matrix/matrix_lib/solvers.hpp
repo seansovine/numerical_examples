@@ -88,7 +88,7 @@ Matrix<T> solve_partial_pivot(const Matrix<T> &A, const Matrix<T> &b) {
     T tmp = y(p(k, 0), 0);
     y(p(k, 0), 0) = y(k, 0);
     y(k, 0) = tmp;
-    // TODO: User Vector here for clarity.
+    // TODO: Use Vector class here for clarity.
 
     // Apply row op to RHS.
     for (unsigned l = k + 1; l < n; l++) {
