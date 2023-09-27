@@ -58,11 +58,13 @@ start = timer()
 u_inn = np.linalg.solve(A, b)
 elapsed = timer() - start
 
+print()
 print(f"Solved equation in {elapsed} seconds.")
 
 u = np.zeros(shape=(M, M))
 u[1:-1, 1:-1] = -1 * u_inn.reshape((M - 2, M - 2))
 
+print()
 print(u)
 
 ## Plot the solution.

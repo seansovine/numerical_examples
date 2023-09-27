@@ -23,7 +23,7 @@ If I had used an iterative method to solve the system, I could have encoded the 
 of the plates into each iteration.
 
 In this first example, I used a finite-difference scheme and solve the resulting solution directly
-using NumPy. With a 150 x 150 grid this already takes about 37 seconds on my machine, which I would
+using NumPy. With a 150 x 150 grid this already takes about 40 seconds on my machine, which I would
 consider to be moderately fast. This shows the benefit of using an iterative method vs. a direct method
 to solve the sparse system, which I'll do in a future example.
 
