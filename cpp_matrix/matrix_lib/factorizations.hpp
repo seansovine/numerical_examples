@@ -90,14 +90,12 @@ std::pair<Matrix<T>, Matrix<unsigned>> LUPartialPivot(const Matrix<T> &A) {
     internal::exchange_row_tails_(M, k, p(k, 0));
 
     if (M(k, k) != 0) {
-      for (unsigned l = k + 1; l < n; l++) {
+      for (unsigned l = k + 1; l < n; l++)
         M(l, k) = M(l, k) / M(k, k);
-      }
-      for (unsigned l = k + 1; l < n; l++) {
-        for (unsigned j = k + 1; j < n; j++) {
+
+      for (unsigned l = k + 1; l < n; l++)
+        for (unsigned j = k + 1; j < n; j++)
           M(l, j) = M(l, j) - M(l, k) * M(k, j);
-        }
-      }
     }
   }
 
