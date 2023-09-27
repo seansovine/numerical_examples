@@ -16,9 +16,9 @@ that the relationship between electric potential and charge density is given by 
 $$-\Delta V_{E} = \frac{\rho}{\epsilon_o}.$$
 
 I initially wanted to make a realistic model of the potential surrounding the plates of a capacitor.
-It is true that the potential is constant inside of a conductor, but rather the realistic
-charge distribution the plates is not uniform. The main purpose of this project is to get started with
-implementing and trying libraries out various solvers, so a came up with a fairly arbitrary distribution.
+It is true that the potential is constant inside of a conductor, but the realistic
+charge distribution in the plates is not uniform. The main purpose of this project is to get started with
+implementing and trying libraries out various solvers, so I came up with a fairly arbitrary distribution.
 If I had used an iterative method to solve the system, I could have encoded the constant potential
 of the plates into each iteration.
 
