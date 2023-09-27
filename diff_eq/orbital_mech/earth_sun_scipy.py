@@ -35,14 +35,14 @@ def dr_dt(y, t):
 
 ## Initial values.
 
-INIT_DIST = 3.0
+INIT_DIST = 8.0
 INIT_X = -INIT_DIST / np.sqrt(2.0)
 INIT_Y = -INIT_DIST / np.sqrt(2.0)
 
 ESCAPE_VEL = np.sqrt(2 * GRAV_CONST * SUN_MASS / INIT_DIST)
 
-INIT_ANGLE = 3.25 * np.pi / 4.0
-INIT_VEL = 1.35 * ESCAPE_VEL
+INIT_ANGLE = 1.5 * np.pi / 4.0
+INIT_VEL = 1.25 * ESCAPE_VEL
 
 r0 = np.asarray(
     [
@@ -55,15 +55,15 @@ r0 = np.asarray(
 
 # Number of timesteps to run the simulation.
 SAMPLES = 2501
-t = np.linspace(0, 1000, SAMPLES)
+t = np.linspace(0, 500, SAMPLES)
 
 trajectory = integ.odeint(dr_dt, r0, t)
 
 ## Setup for plotting the trajectory.
 
 PLOT_DIM = 30.0
-LSHIFT = 0.25
-DSHIFT = 0.25
+LSHIFT = -0.125
+DSHIFT = -0.5
 
 fig = plt.figure()
 ax = plt.axes(
@@ -93,7 +93,7 @@ def update_plt(n):
 ## Plot the trajectory
 
 # Only plot each Nth sample to speed up animation.
-SAMPLING_RATE = 5
+SAMPLING_RATE = 2
 ani = anim.FuncAnimation(
     fig=fig,
     func=update_plt,
@@ -104,4 +104,14 @@ ani = anim.FuncAnimation(
     repeat=False,
 )
 
-plt.show()
+SAVE_GIF = True
+SHOW_PLOT = True
+
+if SAVE_GIF:
+    print()
+    print("Saving... ", end="")
+    ani.save("planet_orbit.gif", fps=30)
+    print("done.")
+
+if SHOW_PLOT:
+    plt.show()
