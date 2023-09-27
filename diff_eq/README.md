@@ -8,3 +8,8 @@ and computing numerical approximations to their solutions.
 Right now this project has a small Python script that simulates a body orbiting a
 much more massive body, using Newton's law of gravitation to approximate Keplerian
 orbits. I'd like to add some more simulations from celestial mechanics.
+
+## `poisson_eqn`
+
+Examples that solve Poisson's equations using various methods implemented by
+hand or by existing libraries.
