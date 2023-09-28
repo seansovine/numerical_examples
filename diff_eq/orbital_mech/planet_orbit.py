@@ -24,7 +24,7 @@ def norm(r):
 
 
 def dr_dt(y, t):
-    """RHS of Newton's second-law as first-order system."""
+    """RHS of Newton's second law as first-order system."""
 
     dist_cubed = norm(y[0:2]) ** 3
     mult = NEWTON_CONST / dist_cubed
