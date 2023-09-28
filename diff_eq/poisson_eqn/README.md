@@ -17,12 +17,12 @@ $$-\Delta V_{E} = \frac{\rho}{\epsilon_o}.$$
 
 I initially wanted to make a realistic model of the potential surrounding the plates of a capacitor.
 It is true that the potential is constant inside of a conductor, but the realistic
-charge distribution in the plates is not uniform. The main purpose of this project is to get started with
-implementing and trying libraries out various solvers, so I came up with a fairly arbitrary distribution.
-If I had used an iterative method to solve the system, I could have encoded the constant potential
-of the plates into each iteration.
+charge distribution in the plates is not uniform. The main purpose of this project is to
+implement and try out libraries for various solution methods, so I came up with a fairly arbitrary
+distribution. If I had used an iterative method to solve the system, I could have encoded the constant
+potential of the plates into each iteration.
 
-In this first example, I used a finite-difference scheme and solve the resulting solution directly
+In this first example, I use a finite-difference scheme and solve the resulting solution directly
 using NumPy. With a 150 x 150 grid this already takes about 40 seconds on my machine, which I would
 consider to be moderately fast. This shows the benefit of using an iterative method vs. a direct method
 to solve the sparse system, which I'll do in a future example.
