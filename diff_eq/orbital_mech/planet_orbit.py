@@ -1,6 +1,6 @@
 """Earth-Sun system using SciPy's odeint solver.
 
-We also rescaled all the parameters to convenient values.
+We have rescaled all the parameters to convenient values.
 """
 
 import numpy as np
@@ -52,6 +52,8 @@ r0 = np.asarray(
         np.sin(INIT_ANGLE) * INIT_VEL / np.sqrt(2.0),
     ]
 )
+
+## Run the simulation.
 
 # Number of timesteps to run the simulation.
 SAMPLES = 2501
