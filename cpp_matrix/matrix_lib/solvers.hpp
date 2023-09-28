@@ -12,9 +12,9 @@ template <typename T> Matrix<T> forward_sub(Matrix<T> L, Matrix<T> b) {
 
   for (unsigned i = 0; i < L.rows; i++) {
     T t = b(i, 0);
-    for (unsigned l = 0; l < i; l++) {
+    for (unsigned l = 0; l < i; l++)
       t -= L(i, l) * v(l, 0);
-    }
+
     v(i, 0) = t / L(i, i);
   }
 
@@ -30,9 +30,9 @@ template <typename T> Matrix<T> back_sub(Matrix<T> U, Matrix<T> v) {
 
   for (int i = n - 1; i >= 0; --i) {
     T t = v(i, 0);
-    for (unsigned l = i + 1; l < n; l++) {
+    for (unsigned l = i + 1; l < n; l++)
       t -= U(i, l) * x(l, 0);
-    }
+
     x(i, 0) = t / U(i, i);
   }
 
@@ -91,9 +91,8 @@ Matrix<T> solve_partial_pivot(const Matrix<T> &A, const Matrix<T> &b) {
     // TODO: Use Vector class here for clarity.
 
     // Apply row op to RHS.
-    for (unsigned l = k + 1; l < n; l++) {
+    for (unsigned l = k + 1; l < n; l++)
       y(l, 0) = y(l, 0) - y(k, 0) * M(l, k);
-    }
   }
 
   // Check for singular matrix.
