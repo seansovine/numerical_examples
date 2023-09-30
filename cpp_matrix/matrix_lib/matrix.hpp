@@ -172,6 +172,7 @@ template <typename T> Matrix<T> &Matrix<T>::operator=(Matrix<T> &&other) {
     throw std::domain_error("Dimensions of assigned matrix must match "
                             "dimensions of destination matrix.");
 
+  delete[] data;
   data = other.data;
   other.data = nullptr;
   return *this;
