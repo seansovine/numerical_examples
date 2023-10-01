@@ -7,10 +7,15 @@
 
 /* Main. */
 
-// Expected to end with ".bmp";
-const char *FILENAME = "sample.bmp";
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    printf("Filename (with .bmp extension) must be passed as the only "
+           "command-line argument to this utility.\n");
+    exit(EXIT_FAILURE);
+  }
 
-int main(void) {
+  char *FILENAME = argv[1];
+
   // Declare dynamic variables.
   FILE *fp = NULL;
   BMPHeader *bmpHeader = NULL;
@@ -54,4 +59,4 @@ int main(void) {
 }
 
 //  c && gcc -Wall convert_gs.c bmp.c -o build/convert_gs && echo "---"
-//    && ./build/convert_gs
+//    && ./build/convert_gs sample.bmp
