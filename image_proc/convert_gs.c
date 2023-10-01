@@ -37,7 +37,10 @@ int main(void) {
                  strlen(FILENAME));
 
   // Clean-up.
+  free(pixData->pixels);
   free(pixData);
+  free(gsPixData->pixels);
+  free(gsPixData);
   free(bmpHeader);
   fclose(fp);
 
