@@ -9,23 +9,24 @@ with various boundary conditions.
 ## `poisson_example.py`
 
 This example is based on the idea of finding the electric potential in a
-region when the charge density in the region is given. It is known
+region when the charge density in the region is given. It follows from Gauss's law
 (see [Wikipedia](https://en.wikipedia.org/wiki/Electric_potential#Electrostatics))
 that the relationship between electric potential and charge density is given by Poisson's equation:
 
 $$-\Delta V_{E} = \frac{\rho}{\epsilon_o}.$$
 
-I initially wanted to make a realistic model of the potential surrounding the plates of a capacitor.
-It is true that the potential is constant inside of a conductor, but the realistic
-charge distribution in the plates is not uniform. The main purpose of this project is to
-implement and try out libraries for various solution methods, so I came up with a fairly arbitrary
-distribution. If I had used an iterative method to solve the system, I could have encoded the constant
+I wanted to make a realistic model of the potential surrounding the plates of a capacitor.
+However, while it is true that the potential is constant inside of a conductor, the realistic
+charge distribution in the plates is not uniform. Since the main purpose of this project is to
+implement by hand and use existing libraries for various solution methods, I decided to just
+come up with my own charge distribution for the sake of the example.
+If I had used an iterative method to solve the system, I could have encoded the constant
 potential of the plates into each iteration.
 
-In this first example, I use a finite-difference scheme and solve the resulting system directly
-using NumPy. With a 150 x 150 grid this already takes about 40 seconds on my machine, which I would
-consider to be moderately fast. This shows the benefit of using an iterative method vs. a direct method
-to solve the sparse system, which I'll do in a future example.
+In this first example, I use a finite-difference approximation and solve the resulting linear system directly
+using NumPy. With a 150 x 150 grid the single-threaded solver already takes about 40 seconds on my moderately-fast
+machine. This shows the benefit of using an iterative method vs. a direct method
+to solve the sparse system in this problem, which I will do in a future example.
 
 We use the Dirichlet boundary condition
 
@@ -39,6 +40,5 @@ Here is a heatmap plot of the solution obtained:
 <img src="poisson_example.png" width="500" height="459">
 </p>
 
-**Note:** I apologize in advance for any inaccuracies in my physics in the description above.
-I also haven't included any discussion of issues like the accuracy of the approximation, but I would
-like to include a brief discussion in future examples.
+I haven't included any discussion of issues like the accuracy of the approximation here, but I would like to
+include such a discussion in future examples.
