@@ -72,6 +72,11 @@ void printHeaderInfo(BMPHeader *bmpHeader, BMPInfoHeader *infoHeader) {
   printf("Important colors: %'d\n", infoHeader->colorsImportant);
 }
 
+/**
+ *  Functions for reading, converting,
+ *  and writing pixel data.
+ */
+
 PixelData *readPixels(BMPHeader *bmpHeader, BMPInfoHeader *infoHeader,
                       FILE *fp) {
   // Rows are padded to a multiple of 4 bytes.
