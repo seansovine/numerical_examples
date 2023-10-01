@@ -12,3 +12,11 @@ established formula's for converting RGB values to grayscale,
 and we can represent grayscale values as
 
 $$t \cdot (255, 255, 255) ~~~\text{with}~~ t \in [0, 1].$$
+
+We will start with the formula mapping
+
+$$(R, G, B) ~~\Rightarrow~~ (n, n, n)$$
+
+where the greyscale value $n$ is given by
+
+$$n = \lfloor 0.229 * R + 0.587 * G + 0.114 * B \rfloor.$$

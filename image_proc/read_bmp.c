@@ -27,14 +27,17 @@ int main(void) {
   // For now we only support 24-bit pixels.
   assert(infoHeader->bitcount == 24);
 
-  // Read pixel data.
-  Pixel *pixels = readPixels(bmpHeader, infoHeader, fp);
+  // Read pixel data and convert to grayscale.
+  PixelData *pixData = readPixels(bmpHeader, infoHeader, fp);
+  convertToGrayscale(pixData);
 
   // Clean-up.
+  free(pixData);
   free(bmpHeader);
   fclose(fp);
 
   return EXIT_SUCCESS;
 }
 
-//  c && gcc -Wall read_bmp.c bmp.c -o read_bmp && echo "---" && ./read_bmp
+//  c && gcc -Wall read_bmp.c bmp.c -o build/read_bmp && echo "---"
+//    && ./build/read_bmp

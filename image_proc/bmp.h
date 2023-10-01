@@ -43,6 +43,12 @@ typedef struct Pixel {
   // Because we assume 24-bit pixels.
 } Pixel;
 
+typedef struct PixelData {
+  Pixel *pixels;
+  size_t width;
+  size_t height;
+} PixelData;
+
 /* Function declarations. */
 
 BMPHeader *readHeader(FILE *);
@@ -51,6 +57,8 @@ BMPInfoHeader *readInfoHeader(FILE *);
 
 void printHeaderInfo(BMPHeader *, BMPInfoHeader *);
 
-Pixel *readPixels(BMPHeader *, BMPInfoHeader *, FILE *);
+PixelData *readPixels(BMPHeader *, BMPInfoHeader *, FILE *);
+
+PixelData *convertToGrayscale(PixelData *);
 
 #endif

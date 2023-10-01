@@ -72,7 +72,8 @@ void printHeaderInfo(BMPHeader *bmpHeader, BMPInfoHeader *infoHeader) {
   printf("Important colors: %'d\n", infoHeader->colorsImportant);
 }
 
-Pixel *readPixels(BMPHeader *bmpHeader, BMPInfoHeader *infoHeader, FILE *fp) {
+PixelData *readPixels(BMPHeader *bmpHeader, BMPInfoHeader *infoHeader,
+                      FILE *fp) {
   // Rows are padded to a multiple of 4 bytes.
   size_t rowSize = (infoHeader->bitcount / 8) * infoHeader->width;
   size_t padding = (4 - rowSize % 4) % 4;
@@ -80,7 +81,50 @@ Pixel *readPixels(BMPHeader *bmpHeader, BMPInfoHeader *infoHeader, FILE *fp) {
   size_t numPixels = infoHeader->width * infoHeader->height;
   Pixel *pixels = (Pixel *)calloc(numPixels, sizeof(struct Pixel));
 
-  // TODO: Under construction.
+  size_t width = infoHeader->width;
+  size_t height = infoHeader->height;
 
-  return pixels;
+  fseek(fp, bmpHeader->offset, SEEK_SET);
+  for (size_t i = 0; i < height; i++) {
+    for (size_t j = 0; j < width; j++) {
+      fread(&pixels[i * width + j].blue, 1, 1, fp);
+      fread(&pixels[i * width + j].green, 1, 1, fp);
+      fread(&pixels[i * width + j].red, 1, 1, fp);
+    }
+    fseek(fp, padding, SEEK_CUR);
+  }
+
+  PixelData *pixData = (PixelData *)calloc(1, sizeof(struct PixelData));
+  pixData->pixels = pixels;
+  pixData->width = infoHeader->width;
+  pixData->height = infoHeader->height;
+  return pixData;
+}
+
+PixelData *convertToGrayscale(PixelData *pixData) {
+  Pixel *pix = pixData->pixels;
+  size_t height = pixData->height;
+  size_t width = pixData->width;
+
+  size_t numPix = pixData->width * pixData->height;
+  Pixel *gsPix = (Pixel *)calloc(numPix, sizeof(struct Pixel));
+  PixelData *gsPixData = (PixelData *)calloc(1, sizeof(struct PixelData));
+  gsPixData->pixels = gsPix;
+  gsPixData->width = width;
+  gsPixData->height = height;
+
+  for (size_t i = 0; i < height; i++) {
+    for (size_t j = 0; j < width; j++) {
+      float n_fl = 0.299 * pix[i * width + j].red +
+                   0.587 * pix[i * width + j].green +
+                   0.114 * pix[i * width + j].blue;
+
+      uint8_t n = (uint8_t)n_fl;
+      gsPix[i * width + j].blue = n;
+      gsPix[i * width + j].green = n;
+      gsPix[i * width + j].red = n;
+    }
+  }
+
+  return gsPixData;
 }
