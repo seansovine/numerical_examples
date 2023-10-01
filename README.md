@@ -21,6 +21,6 @@ and computing and visualizing numerical approximations of their solutions.
 
 ## `image_proc`
 
-This is for image processing projects. Write now it contains a C program I've written to
-read a 24-bit BMP image, convert its pixels from color to grayscale, and write the converted
-image to a file.
+This folder is for image processing projects. Right now it contains a C program I've written to
+read a 24-bit BMP-formatted image file, convert its pixels from color to grayscale, and write the converted
+image to a new file.
