@@ -7,7 +7,7 @@
 
 /* Main. */
 
-// Expected to end with "".bmp";
+// Expected to end with ".bmp";
 const char *FILENAME = "sample.bmp";
 
 int main(void) {
