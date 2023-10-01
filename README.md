@@ -18,3 +18,9 @@ See the project [README](./cpp_matrix/README.md).
 
 This folder contains projects for modeling with ordinary and partial differential equations
 and computing and visualizing numerical approximations of their solutions.
+
+## `image_proc`
+
+This is for image processing projects. Write now it contains a C program I've written to
+read a 24-bit BMP image, convert its pixels from color to grayscale, and write the converted
+image to a file.
