@@ -1,9 +1,8 @@
 # C BMP Color-to-Grayscale Converter
 
-This project will be a C program that, at least to begin with,
-will read the data from a 24-bit color BMP file, convert
-the image it contains to a grayscale image, and then writes
-the grayscale image to a file.
+This project is a C program that reads the data from a 24-bit
+color BMP file, converts the image it contains to a grayscale
+image, and then writes the grayscale image to a file.
 
 **Note:** Bitmap represents pixels only using colors.
 Specifically, 24-bit BMP uses the RGB system with one

@@ -139,9 +139,6 @@ void writeImageFile(FILE *inFile, BMPHeader *bmpHeader,
 
   FILE *outFile = fopen(outFileName, "w");
 
-  //   char data[] = "Test";
-  //   fwrite(data, sizeof data[0], 5, outFile);
-
   // Copy header directly from old file.
   size_t headerLen = bmpHeader->offset;
   uint8_t *someHeaderBytes = (uint8_t *)calloc(headerLen, sizeof(uint8_t));
