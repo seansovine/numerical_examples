@@ -1,15 +1,16 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h> // For EXIT_SUCCESS and EXIT_FAILURE.
+#include <string.h> // For strlen.
 
 #include "bmp.h"
 
 /* Main. */
 
+// Expected to end with "".bmp";
 const char *FILENAME = "sample.bmp";
 
 int main(void) {
-
   FILE *fp;
   BMPHeader *bmpHeader = NULL;
   BMPInfoHeader *infoHeader = NULL;
@@ -29,7 +30,11 @@ int main(void) {
 
   // Read pixel data and convert to grayscale.
   PixelData *pixData = readPixels(bmpHeader, infoHeader, fp);
-  convertToGrayscale(pixData);
+  PixelData *gsPixData = convertToGrayscale(pixData);
+
+  // Write result to "<FILENAME_NO_EXT>_grayscale.bmp";
+  writeImageFile(fp, bmpHeader, infoHeader, gsPixData, FILENAME,
+                 strlen(FILENAME));
 
   // Clean-up.
   free(pixData);
@@ -39,5 +44,5 @@ int main(void) {
   return EXIT_SUCCESS;
 }
 
-//  c && gcc -Wall read_bmp.c bmp.c -o build/read_bmp && echo "---"
-//    && ./build/read_bmp
+//  c && gcc -Wall convert_gs.c bmp.c -o build/convert_gs && echo "---"
+//    && ./build/convert_gs

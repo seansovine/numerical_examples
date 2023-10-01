@@ -61,4 +61,7 @@ PixelData *readPixels(BMPHeader *, BMPInfoHeader *, FILE *);
 
 PixelData *convertToGrayscale(PixelData *);
 
+void writeImageFile(FILE *, BMPHeader *, BMPInfoHeader *, PixelData *,
+                    const char *, size_t);
+
 #endif

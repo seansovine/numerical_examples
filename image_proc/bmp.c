@@ -128,3 +128,53 @@ PixelData *convertToGrayscale(PixelData *pixData) {
 
   return gsPixData;
 }
+
+void writeImageFile(FILE *inFile, BMPHeader *bmpHeader,
+                    BMPInfoHeader *infoHeader, PixelData *gsPixels,
+                    const char *fileName, size_t fNameLen) {
+  char outFileName[fNameLen + 15];
+  strncpy(outFileName, fileName, fNameLen);
+  strncpy(outFileName + (fNameLen - 4), "_grayscale.bmp", 15);
+  printf("\nWriting grayscale image to file: %s\n", outFileName);
+
+  FILE *outFile = fopen(outFileName, "w");
+
+  //   char data[] = "Test";
+  //   fwrite(data, sizeof data[0], 5, outFile);
+
+  // Copy header directly from old file.
+  size_t headerLen = bmpHeader->offset;
+  uint8_t *someHeaderBytes = (uint8_t *)calloc(headerLen, sizeof(uint8_t));
+  fseek(inFile, 0, SEEK_SET);
+  fread(someHeaderBytes, sizeof(uint8_t), headerLen, inFile);
+  fwrite(someHeaderBytes, sizeof(uint8_t), headerLen, outFile);
+
+  // Prepare to write pixels.
+  size_t height = gsPixels->height;
+  size_t width = gsPixels->width;
+  Pixel *pix = gsPixels->pixels;
+
+  // Rows are padded to a multiple of 4 bytes.
+  size_t rowSize = (infoHeader->bitcount / 8) * width;
+  size_t padding = (4 - rowSize % 4) % 4;
+
+  // Write grayscale pixels into file.
+  for (size_t i = 0; i < height; i++) {
+    for (size_t j = 0; j < width; j++) {
+      Pixel *curPix = pix + (i * width + j);
+      fwrite(&curPix->blue, 1, 1, outFile);
+      fwrite(&curPix->green, 1, 1, outFile);
+      fwrite(&curPix->red, 1, 1, outFile);
+    }
+
+    // Pad row as necessary.
+    for (size_t n = 0; n < padding; n++) {
+      uint8_t pad = 0;
+      fwrite(&pad, 1, 1, outFile);
+    }
+  }
+
+  // Cleanup.
+  free(someHeaderBytes);
+  fclose(outFile);
+}
