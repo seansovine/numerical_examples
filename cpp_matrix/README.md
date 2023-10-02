@@ -9,7 +9,7 @@ made some effort to avoid unnecessary object copying.
 
 ## Examples
 
-The main folder contains a few test files, including these:
+The main folder contains a few test programs, including these:
 
 The file `matrix_test.cpp` demonstrates the defined operations on simple examples.
 
@@ -19,7 +19,7 @@ where $\pi$ is the steady-state distribution of the Markov chain with transition
 
 ## Building and running
 
-There is a simple shell script to build and run test scripts using the Makefile in this directory:
+There is a simple shell script to build and run test programs using the Makefile in this directory:
 
 ```shell
 chmod +x bld
@@ -30,11 +30,11 @@ chmod +x bld
 
 _Classes:_
 
-- Has a Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
-- Has a Vector subclass representing a column matrix, implementing the subscript operator.
+- A Matrix class template representing an $m x n$ matrix with scalar type T, implementing the parentheses operator.
+- A Vector subclass representing a column matrix, implementing the subscript operator.
 - A `MatrixFunctor<T>` class template that takes a regular function `f` mapping a `T` to a `T` and returns an object that
   acts like a function `F` that maps a `Matrix<T>` to a `Matrix<T>` by applying `f` component-wise.
-  Like a very basic version of NumPy ufuncs.
+  Like a very basic version of NumPy's universal functions.
 
 _Operations:_
 
@@ -44,8 +44,8 @@ _Operations:_
 _Algorithms:_
 
 - A solver for the square system $Ax = b$ based on the LU w/ partial pivoting algorithm in Golub and Van Loan.
-- A very basic LU factorization.
-- A very basic solver for the square, full-rank linear system $Ax= b$, using the $LU$ factorization.
+- A basic LU factorization without pivoting.
+- A basic solver for the square, full-rank linear system $Ax= b$, using the basic $LU$ factorization.
 
 ## Design decisions
 
@@ -58,13 +58,16 @@ Here are some early decisions that have shaped the design:
 
 Eventually we can implement a basic lazy evaluation scheme for the operations, in which each operation returns an expression template.
 
+I'm also considering adding reshape and view objects that give a different interface for accessing the underlying
+data of an existing matrix object. Having these would simplify the code when implementing some algorithms.
+
 ## Further ideas
 
 - Implement more operations:
-  - Matrix transpose: could be done with a derived class overriding access.
-  - Matrix-vector product (just need to handle return type).
-  - Vector-vector dot product.
+  - Matrix transpose: could be done with a derived view class that overrides access.
+  - Matrix-vector product (we just need to handle the return type now).
+  - Vector-vector dot product, or generalize to all matrices of matching shape.
 - Use the [Curiously Recurring Template Pattern](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern) for handling inheritance.
 - Use [expression templates](https://en.wikipedia.org/wiki/Expression_templates) for matrix operations.
-- Optimize the matrix multiplication -- maybe use BLAS and LAPACK.
+- Optimize the matrix multiplication -- maybe delegate to BLAS and LAPACK under the hood.
 - Consider casting scalars, e.g., to allow integer matrix x double matrix.
