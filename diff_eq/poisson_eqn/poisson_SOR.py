@@ -31,7 +31,16 @@ if VERBOSE:
 
 
 def SOR_next(A, b, x):
-    """Perform one SOR iteration."""
+    """
+    Perform one SOR iteration.
+
+    Computes the residual at each step, an O(M^2) operation.
+    It is possible to determine the convergence rate analytically,
+    So then we could choose the number of iterations a priori.
+
+    However this is still an order faster than a direct solution and
+    gives access to larger problem.
+    """
 
     if VERBOSE:
         print("---\n")
@@ -82,20 +91,44 @@ def SOR_next(A, b, x):
         print(x)
         print()
 
-    return x_n
+    prod = A @ x_n
+    delta = prod - b.reshape((N,))
+    resid = np.linalg.norm(delta)
+
+    if VERBOSE:
+        print("\n---\n")
+        print(f"A shape: {A.shape}; x_n shape: {x_n.shape}; b shape: {b.shape}")
+        print(prod.reshape((M - 2, M - 2)))
+        print()
+        print(b.reshape(M - 2, M - 2))
+        print()
+        print(delta.reshape(M - 2, M - 2))
+        print()
+        print(f"Residual is: {resid}")
+
+    return (x_n, resid)
 
 
 # Initial guess at the origin.
 x = np.zeros(N)
 
-NUM_ITER = 100
+print("\n---\n")
+mach_eps = np.finfo(np.float64).eps
+print(f"Machine epeilon for np.float64: {mach_eps}")
+print("Setting convergence threshold to 1/2 * machine epsilon.")
+THRESHOLD = 0.5 * mach_eps
 
 start = timer()
-for i in range(NUM_ITER):
-    x = SOR_next(A, b, x)
+num_iter = 0
+while True:
+    num_iter += 1
+    x, resid = SOR_next(A, b, x)
+    if resid < THRESHOLD:
+        break
+
 elapsed = timer() - start
 
-print(f"Performed {NUM_ITER} SOR iterations in {elapsed:.2f} seconds.")
+print(f"Performed {num_iter} SOR iterations to convergence in {elapsed:.2f} seconds.")
 print()
 
 u = np.zeros(shape=(M, M))
