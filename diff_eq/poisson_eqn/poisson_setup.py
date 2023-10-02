@@ -1,9 +1,6 @@
-from timeit import default_timer as timer
-
 import numpy as np
-import matplotlib.pyplot as plt
 
-np.set_printoptions(precision=2)
+VERBOSE = False
 
 M = 151  # Side length of square grid.
 
@@ -25,7 +22,8 @@ for i in range(M - 2):
 A[np.eye(N=N, k=M - 2, dtype="bool")] = 1
 A[np.eye(N=N, k=-(M - 2), dtype="bool")] = 1
 
-# print(A)
+if VERBOSE:
+    print(A)
 
 ## Build RHS
 
@@ -47,28 +45,8 @@ for i in range(t_cord, b_cord + 1):
     g[i, l_coord : l_coord + 2] = 0.3 + normalizer * (i - (M - 1) / 2.0) ** 4
     g[i, r_coord : r_coord + 2] = -g[i, l_coord : l_coord + 2]
 
-# print()
-print(g)
+if VERBOSE:
+    print()
+    print(g)
 
 b = g[1:-1, 1:-1].reshape((N, 1))
-
-## Find solution by directly solving the system.
-
-start = timer()
-u_inn = np.linalg.solve(A, b)
-elapsed = timer() - start
-
-print()
-print(f"Solved equation in {elapsed} seconds.")
-
-u = np.zeros(shape=(M, M))
-u[1:-1, 1:-1] = -1 * u_inn.reshape((M - 2, M - 2))
-
-print()
-print(u)
-
-## Plot the solution.
-
-plt.imshow(u, cmap="inferno")
-plt.colorbar()
-plt.show()
