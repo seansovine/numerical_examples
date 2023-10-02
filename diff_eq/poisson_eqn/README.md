@@ -6,7 +6,7 @@ $$\Delta u = f$$
 
 with various boundary conditions.
 
-## `poisson_example.py`
+## `poisson_direct.py`
 
 This example is based on the idea of finding the electric potential in a
 region when the charge density in the region is given. It follows from Gauss's law
@@ -42,3 +42,14 @@ Here is a heatmap plot of the solution obtained:
 
 I haven't included any discussion of issues like the accuracy of the approximation here, but I would like to
 include such a discussion in future examples.
+
+## `poisson_SOR.py`
+
+This solves the same problem using the iterative method of
+[successive over-relaxation](https://en.wikipedia.org/wiki/Successive_over-relaxation#Symmetric_successive_over-relaxation)
+(SOR).
+This serial implementation checks the residual at each step, which is an $O(M^2)$ operation,
+where $M$ is the number of mesh points per axis. We could use the analytic expression for
+the convergence rate to estimate the number of iterations needed. With $M = 201$ the iteration
+converges to within twice machine epsilon in 912 iterations, taking about 110 seconds. The direct
+method times out on this problem size.
