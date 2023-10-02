@@ -51,5 +51,5 @@ This solves the same problem using the iterative method of
 This serial implementation checks the residual at each step, which is an $O(M^2)$ operation,
 where $M$ is the number of mesh points per axis. We could use the analytic expression for
 the convergence rate to estimate the number of iterations needed. With $M = 201$ the iteration
-converges to within twice machine epsilon in 912 iterations, taking about 110 seconds. The direct
+converges to within twice machine epsilon in 912 steps, taking about 110 seconds. The direct
 method times out on this problem size.
