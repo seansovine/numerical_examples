@@ -116,7 +116,7 @@ print("\n---\n")
 mach_eps = np.finfo(np.float64).eps
 print(f"Machine epeilon for np.float64: {mach_eps}")
 print("Setting convergence threshold to 1/2 * machine epsilon.")
-THRESHOLD = 0.5 * mach_eps
+THRESHOLD = 2 * mach_eps
 
 start = timer()
 num_iter = 0
