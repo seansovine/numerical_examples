@@ -11,20 +11,15 @@
  */
 
 BMPHeader *readHeader(FILE *fp) {
-  // Dynamically allocate.
   BMPHeader *bmpHeader = (BMPHeader *)calloc(1, sizeof(struct BMPHeader));
 
-  // Using this way as an example.
-  char type[3] = {'\0', '\0', '\0'};
-  fread(&type, 1, 2, fp);
-  strncpy(bmpHeader->type, type, 3);
-
+  fread(&bmpHeader->type, 1, 2, fp);
+  bmpHeader->type[2] = '\0';
   fread(&bmpHeader->size, 4, 1, fp);
   // Ignore reserved fields.
   fseek(fp, 4, SEEK_CUR);
   fread(&bmpHeader->offset, 4, 1, fp);
 
-  // Don't forget to free when finished.
   return bmpHeader;
 }
 
