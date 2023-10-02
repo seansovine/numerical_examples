@@ -13,6 +13,7 @@ VERBOSE = False
 from poisson_setup import A, b, M, h
 
 # Imported from poisson_setup:
+# A = finite diff. matrix for internal points.
 # b = RHS of finite diff. eqn. Ax = b.
 # M = number of grid endpoints.
 # h = Distance between adjacent mesh points.
@@ -28,6 +29,9 @@ N = (M - 2) ** 2
 
 if VERBOSE:
     print(f"Relaxation parameter omega is: {OMEGA:.4f}\n")
+
+
+## SOR iteration function.
 
 
 def SOR_next(A, b, x):
@@ -109,6 +113,8 @@ def SOR_next(A, b, x):
     return (x_n, resid)
 
 
+## Initial guess and convergence threshold.
+
 # Initial guess at the origin.
 x = np.zeros(N)
 
@@ -117,6 +123,8 @@ mach_eps = np.finfo(np.float64).eps
 print(f"Machine epeilon for np.float64: {mach_eps}")
 print("Setting convergence threshold to 2 * machine epsilon.")
 THRESHOLD = 2 * mach_eps
+
+## Iterate until epsilon-convergence.
 
 start = timer()
 num_iter = 0
