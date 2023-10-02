@@ -10,7 +10,7 @@ import numpy as np
 VERBOSE = True
 
 # # of mesh pionts.
-M = 151
+M = 201
 
 # Spacing of mesh points.
 h = 1 / (M - 1)
