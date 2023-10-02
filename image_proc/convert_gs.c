@@ -1,5 +1,4 @@
-#include <assert.h>
-#include <stdio.h>
+#include <stdio.h>  // For FILE utilities.
 #include <stdlib.h> // For EXIT_SUCCESS and EXIT_FAILURE.
 #include <string.h> // For strlen.
 
