@@ -1,4 +1,4 @@
-"""Solve Poisson's equation with Successive Over-Relaxation.
+"""Solve Poisson's equation using successive over-relaxation.
 """
 
 from timeit import default_timer as timer
