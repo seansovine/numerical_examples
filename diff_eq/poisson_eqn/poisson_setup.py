@@ -1,10 +1,22 @@
+""" Setup for discrete Poisson equation solution.
+
+We solve Lu = g on [0, 1] x [0, 1] w/ Dirichlet
+condition u = 0 on boundary, using a finite-difference
+approximation.
+"""
+
 import numpy as np
 
-VERBOSE = False
+VERBOSE = True
 
-M = 151  # Side length of square grid.
+# # of mesh pionts.
+M = 151
+
+# Spacing of mesh points.
+h = 1 / (M - 1)
 
 ## Build operator matrix.
+#   A represents the Laplacian at interior pts.
 #   Boundary values encoded in RHS.
 
 N = (M - 2) ** 2
@@ -24,6 +36,7 @@ A[np.eye(N=N, k=-(M - 2), dtype="bool")] = 1
 
 if VERBOSE:
     print(A)
+    print()
 
 ## Build RHS
 
@@ -46,7 +59,7 @@ for i in range(t_cord, b_cord + 1):
     g[i, r_coord : r_coord + 2] = -g[i, l_coord : l_coord + 2]
 
 if VERBOSE:
-    print()
     print(g)
+    print()
 
-b = g[1:-1, 1:-1].reshape((N, 1))
+b = g[1:-1, 1:-1].reshape((N, 1)) * h**2
