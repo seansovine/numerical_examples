@@ -1,4 +1,4 @@
 build/
 sketch/
 .vscode
-*.pyc
+__pycache__
