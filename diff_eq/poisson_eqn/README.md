@@ -46,7 +46,7 @@ include such a discussion in future examples.
 ## `poisson_SOR.py`
 
 This solves the same problem using the iterative method of
-[successive over-relaxation](https://en.wikipedia.org/wiki/Successive_over-relaxation#Symmetric_successive_over-relaxation)
+[successive over-relaxation](https://en.wikipedia.org/wiki/Successive_over-relaxation)
 (SOR).
 This serial implementation checks the residual at each step, which is an $O(M^2)$ operation,
 where $M$ is the number of mesh points per axis. We could use the analytic expression for
