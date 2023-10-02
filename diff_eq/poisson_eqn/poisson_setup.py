@@ -47,6 +47,7 @@ g = np.zeros(shape=(M, M))
 L_RAT = 7 / 16
 R_RAT = 9 / 16
 H_RAT = 1 / 2
+PLATE_WIDTH = 1
 
 l_coord = int(M * L_RAT)
 r_coord = int(M * R_RAT)
@@ -55,8 +56,8 @@ b_cord = t_cord + int(M * H_RAT)
 
 normalizer = (2 / (b_cord - t_cord)) ** 4
 for i in range(t_cord, b_cord + 1):
-    g[i, l_coord : l_coord + 2] = 0.3 + normalizer * (i - (M - 1) / 2.0) ** 4
-    g[i, r_coord : r_coord + 2] = -g[i, l_coord : l_coord + 2]
+    g[i, l_coord : l_coord + PLATE_WIDTH] = 0.3 + normalizer * (i - (M - 1) / 2.0) ** 4
+    g[i, r_coord : r_coord + PLATE_WIDTH] = -g[i, l_coord : l_coord + PLATE_WIDTH]
 
 if VERBOSE:
     print(g)
