@@ -47,10 +47,11 @@ int main(int argc, char *argv[]) {
   }
 
   // Clean-up.
-  free(pixData->pixels);
-  free(pixData);
   free(gsPixData->pixels);
   free(gsPixData);
+  free(pixData->pixels);
+  free(pixData);
+  free(infoHeader);
   free(bmpHeader);
   fclose(fp);
 
