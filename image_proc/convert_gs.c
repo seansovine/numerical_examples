@@ -47,10 +47,8 @@ int main(int argc, char *argv[]) {
   }
 
   // Clean-up.
-  free(gsPixData->pixels);
-  free(gsPixData);
-  free(pixData->pixels);
-  free(pixData);
+  free_PixelData(gsPixData);
+  free_PixelData(pixData);
   free(infoHeader);
   free(bmpHeader);
   fclose(fp);
@@ -58,5 +56,5 @@ int main(int argc, char *argv[]) {
   return EXIT_SUCCESS;
 }
 
-//  c && gcc -Wall convert_gs.c bmp.c -o build/convert_gs && echo "---"
-//    && ./build/convert_gs sample.bmp
+// clang-format off
+//  c && gcc -Wall convert_gs.c bmp.c -o build/convert_gs && echo "---" && ./build/convert_gs sample.bmp

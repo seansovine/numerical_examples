@@ -49,6 +49,8 @@ typedef struct PixelData {
   size_t height;
 } PixelData;
 
+void free_PixelData(PixelData *);
+
 /* Function declarations. */
 
 BMPHeader *readHeader(FILE *);

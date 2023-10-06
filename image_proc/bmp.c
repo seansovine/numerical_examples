@@ -68,6 +68,15 @@ void printHeaderInfo(BMPHeader *bmpHeader, BMPInfoHeader *infoHeader) {
 }
 
 /**
+ *  Functinos for managing structures.
+ */
+
+void free_PixelData(PixelData *pixData) {
+  free(pixData->pixels);
+  free(pixData);
+}
+
+/**
  *  Functions for reading, converting,
  *  and writing pixel data.
  */
