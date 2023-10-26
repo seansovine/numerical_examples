@@ -17,6 +17,7 @@ template <typename T> Matrix<T> operator*(const T &, const Matrix<T> &);
 /* ---- Matrix declaration. ---- */
 
 template <typename T> class Matrix {
+protected:
   // Store row-major.
   T *data;
 
