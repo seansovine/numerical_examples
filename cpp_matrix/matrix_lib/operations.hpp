@@ -64,4 +64,20 @@ Matrix<T> operator+(const Matrix<T> &lhs, const Matrix<T> &rhs) {
   return result;
 }
 
+/* ---- Matrix-Vector product. ---- */
+
+template <typename T>
+Vector<T> operator*(const Matrix<T> &lhs, const Vector<T> &rhs) {
+  Vector<T> result(lhs.rows);
+
+  for (unsigned i = 0; i < lhs.rows; i++) {
+    T val{};
+    for (unsigned j = 0; j < lhs.cols; j++)
+      val += lhs(i, j) * rhs[j];
+    result[i] = val;
+  }
+
+  return result;
+}
+
 } // namespace matrix
