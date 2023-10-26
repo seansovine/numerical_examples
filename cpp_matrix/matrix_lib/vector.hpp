@@ -21,6 +21,8 @@ public:
   Vector(Matrix<T> &&);
   Vector(Vector<T> &&);
 
+  Vector(std::initializer_list<T>);
+
   T &operator[](const unsigned &i);
   T operator[](const unsigned &i) const;
 
@@ -41,6 +43,14 @@ template <typename T> T Vector<T>::operator[](const unsigned &i) const {
 }
 
 // Constructors. (Base desctructor is used.)
+
+template <typename T>
+Vector<T>::Vector(std::initializer_list<T> init) : Matrix<T>(init.size(), 1) {
+  unsigned cols = init.size();
+  for (unsigned i = 0; i < cols; i++) {
+    this->data[i] = (init.begin())[i];
+  }
+};
 
 template <typename T>
 Vector<T>::Vector(const unsigned &rows) : Matrix<T>(rows, 1){};
