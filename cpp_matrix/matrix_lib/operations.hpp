@@ -8,7 +8,8 @@ namespace matrix {
 namespace internal {
 
 template <typename T>
-T prodIK_(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i, unsigned k) {
+inline T prodIK_(const Matrix<T> &lhs, const Matrix<T> &rhs, unsigned i,
+                 unsigned k) {
   T result{};
   for (unsigned j = 0; j < lhs.cols; j++)
     result += lhs(i, j) * rhs(j, k);
