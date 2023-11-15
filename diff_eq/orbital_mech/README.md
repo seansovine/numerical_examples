@@ -12,5 +12,3 @@ are displayed as an animated graph using `matplotlib.animate` and optionally wri
 One can show (see [Wikipedia](<https://en.wikipedia.org/wiki/Kepler_orbit#Mathematical_solution_of_the_differential_equation_(1)_above>))
 that in this model the orbits will be conics -- either circular,
 parabolic, or hyperbolic depending on the energy of the initial conditions.
-The `scipy` solver produces a fairly accurate approximation in a reasonable
-amount of time.
