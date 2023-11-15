@@ -1,12 +1,12 @@
 # Poisson Equation Solvers
 
-In this project we'll implement and try out libraries for a few solvers for the Poisson equation,
+This project has NumPy implementations of a few basic solvers solvers for the Poisson equation,
 
-$$\Delta u = f$$
+$$\Delta u = f.$$
 
-with various boundary conditions. The original idea was to obtain the electric potential $u$
+The original idea for the example was to obtain the electric potential $u$
 in the region around the plates of a capacitor when a charge distribution $f$ is given, a problem
-which can also be solved using numerical integration.
+which can also be solved [using numerical integration](https://en.wikipedia.org/wiki/Electric_potential#Electric_potential_due_to_a_point_charge).
 However, I ended up choosing an arbitrary, but interesting, "charge distribution" function.
 We use the Dirichlet boundary condition
 
