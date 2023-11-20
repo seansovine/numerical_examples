@@ -36,4 +36,4 @@ This solves the same problem using the iterative method of
 (SOR).
 This serial implementation checks the residual at each step, and stops when the difference
 of the last two iterations is less than twice machine epsilon. With $M = 200$ the iteration
-converges on my machine in 912 steps, taking about 110 seconds.
+converges in 912 steps, taking about 110 seconds on my machine.

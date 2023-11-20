@@ -38,12 +38,8 @@ def SOR_next(A, b, x):
     """
     Perform one SOR iteration.
 
-    Computes the residual at each step, an O(M^2) operation.
-    It is possible to determine the convergence rate analytically,
-    So then we could choose the number of iterations a priori.
-
-    However this is still an order faster than a direct solution and
-    gives access to larger problem.
+    Computes the residual at each step, and
+    returns it along with the new value.
     """
 
     if VERBOSE:
