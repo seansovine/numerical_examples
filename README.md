@@ -8,7 +8,7 @@ there's a good chance that many things could be done better, and I would
 probably do some things differently if I redid them now.
 
 For example, I would use a simple CMake build system for the C and C++ code.
-And I might make a few different design and coding standards decisions
+And I might make a few design and coding standards decisions
 differently in the matrix library. One thing I would definitely do is
 to use more concurrency to speed things up.
 
