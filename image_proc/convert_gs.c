@@ -1,10 +1,12 @@
+// Reads a 24-bit BMP image and converts its pixels
+// to grayscale using the standard formula
+//   0.299 * R + 0.587 * G + 0.114 * B.
+
 #include <stdio.h>  // For FILE utilities.
 #include <stdlib.h> // For EXIT_SUCCESS and EXIT_FAILURE.
 #include <string.h> // For strlen.
 
 #include "bmp.h"
-
-/* Main. */
 
 int main(int argc, char *argv[]) {
   if (argc != 2) {
@@ -16,6 +18,7 @@ int main(int argc, char *argv[]) {
   char *FILENAME = argv[1];
 
   // Declare dynamic variables.
+
   FILE *fp = NULL;
   BMPHeader *bmpHeader = NULL;
   BMPInfoHeader *infoHeader = NULL;
@@ -28,13 +31,17 @@ int main(int argc, char *argv[]) {
   }
 
   // Read headers and display info.
+
   bmpHeader = readHeader(fp);
   infoHeader = readInfoHeader(fp);
   printHeaderInfo(bmpHeader, infoHeader);
 
-  // For now we only support 24-bit pixels.
+  int return_code = EXIT_SUCCESS;
+
   if (strcmp(bmpHeader->type, "BM") != 0 || infoHeader->bitcount != 24) {
+    // For now we only support 24-bit pixels.
     printf("Only 24-bit BMP files are accepted.");
+    return_code = EXIT_FAILURE;
     // We still need to deallocate some vars.
   } else {
     // Read pixel data and convert to grayscale.
@@ -46,14 +53,15 @@ int main(int argc, char *argv[]) {
                    strlen(FILENAME));
   }
 
-  // Clean-up.
+  // Clean-up: Deallocate dynamic vars and close file.
+
   free_PixelData(gsPixData);
   free_PixelData(pixData);
   free(infoHeader);
   free(bmpHeader);
   fclose(fp);
 
-  return EXIT_SUCCESS;
+  return return_code;
 }
 
 // clang-format off
